@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
+    pageEncoding="UTF-8"%>
+<%@ page import = "java.io.*,java.util.*, javax.servlet.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,12 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<h1>Supplier Information</h1>
+<body>
+	<h1>Customer Information</h1>
 	Hello, you logged in successfully
 	<center></center>
 	<div style="color: #FF0000;">
-		Welcome, Supplier
+		Welcome, Customer
 
 		<%= request.getSession().getAttribute("currentUser") %>
 		! Current time is :
