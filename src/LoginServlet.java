@@ -43,31 +43,32 @@ public class LoginServlet extends HttpServlet {
 		// will get our information from the request and by specifying the name of what
 		// we want to get ex username
 		String username = request.getParameter("username");
+		String usernameUpper = username.toUpperCase();
 		String password = request.getParameter("password");
 		String roles = request.getParameter("roles");
-		if (username.equals("ICSI518") && password.equals("Fall2017")) {
+		if (usernameUpper.equals("ICSI518") && password.equals("Fall2017")) {
 			// if login is successfull then redirect to members jsp page
 			// request.getSession().removeAttribute("errorMessage");
 			// response.sendRedirect("members.jsp");
 			if (roles.equals("Supplier")) {
-				request.getRequestDispatcher("Supplier.jsp").forward(request, response);
 				request.getSession().setAttribute("currentUser", username);
+				request.getRequestDispatcher("Supplier.jsp").forward(request, response);
 				// request.setAttribute("currentDate", "Please enter username.");
 			}
 
 			if (roles.equals("Wholesaler")) {
-				request.getRequestDispatcher("Wholesaler.jsp").forward(request, response);
 				request.getSession().setAttribute("currentUser", username);
+				request.getRequestDispatcher("Wholesaler.jsp").forward(request, response);
 			}
 			
 			if (roles.equals("Retailer")) {
-				request.getRequestDispatcher("Retailer.jsp").forward(request, response);
 				request.getSession().setAttribute("currentUser", username);
+				request.getRequestDispatcher("Retailer.jsp").forward(request, response);
 			}
 			
 			if (roles.equals("Customer")) {
-				request.getRequestDispatcher("Customer.jsp").forward(request, response);
 				request.getSession().setAttribute("currentUser", username);
+				request.getRequestDispatcher("Customer.jsp").forward(request, response);
 			}
 
 			// request.getRequestDispatcher("members.jsp").forward(request, response);
@@ -75,15 +76,37 @@ public class LoginServlet extends HttpServlet {
 			// if not succesfull redirect to error.jsp
 			// response.sendRedirect("error.jsp");
 			// request.getSession().removeAttribute("errorMessage");
-			if (username.equals("ICSI518") && password.isEmpty()) {
-				request.setAttribute("errorMessage", "Please enter password.");
-			} else if (username.isEmpty() && password.equals("Fall2017")) {
+			if (usernameUpper.isEmpty() && password.isEmpty()) {
+				request.setAttribute("errorMessage", "Please enter username and password.");
+			}
+			 else if (usernameUpper.isEmpty()) {
 				request.setAttribute("errorMessage", "Please enter username.");
-			} else if (username.isEmpty() && password.isEmpty()) {
+			} else if (password.isEmpty()) {
+				request.setAttribute("errorMessage", "Please enter password.");
+			} else {
+				request.setAttribute("errorMessage", "Invalid username and password.");
+			}
+			
+			/*
+			***TESTING to see if random input and some field left blank***
+			{ // if the username or password incorrect will go here
+			// if not succesfull redirect to error.jsp
+			// response.sendRedirect("error.jsp");
+			// request.getSession().removeAttribute("errorMessage");
+			if (usernameUpper.equals("ICSI518") && password.isEmpty()) {
+				request.setAttribute("errorMessage", "Please enter password.");
+			} else if (usernameUpper.isEmpty() && password.equals("Fall2017")) {
+				request.setAttribute("errorMessage", "Please enter username.");
+			} else if (usernameUpper.isEmpty() && password.isEmpty()) {
 				request.setAttribute("errorMessage", "Please enter username and password.");
 			} else {
 				request.setAttribute("errorMessage", "Invalid username and password.");
 			}
+			
+			
+			
+			*/
+			
 			/*
 			 * if(!(username.equals("ICSI518")) && !(password.equals("Fall2017"))) {
 			 * request.getSession().setAttribute("errorMessage",
