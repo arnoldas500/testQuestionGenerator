@@ -1,6 +1,12 @@
 package authentication;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +41,39 @@ public class SignupServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			//fetching the data and storing in local variable 
+			String name = request.getParameter("user");
+			String password = request.getParameter("password");
+			//creating sql queery from above data
+			//user is the actual sql table name and name and password is what it takes
+			String sql = "insert into User(name,password) values(?,?)";
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/myNewConnection";
+			String username = "root";
+			String passwordSQL = "422981a1";
+			Connection connection = DriverManager.getConnection(url,username,passwordSQL);
+			
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, password);
+			//now need to execute this statement
+			ps.executeUpdate();
+			
+			//print out what was executed
+			PrintWriter out = response.getWriter();
+			out.println("You have successfully signed up!");
+			//***DONT FORGET TO UPDATE WEB.XML under WEB-INF
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//doGet(request, response);
 	}
 
 }
