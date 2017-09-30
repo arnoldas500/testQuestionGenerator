@@ -1,5 +1,8 @@
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//getConnection();
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -20,7 +24,33 @@ public class LoginServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	/*
+	//used to connect to mysql databse
+	public static Connection getConnection() throws Exception{
+		//to catch any errors we might get
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			//where the databse is located
+			String url = "jdbc:mysql://localhost:3306/database";
+			String username = "arnold";
+			String password = "mypass";
+			Class.forName(driver);
+			
+			Connection connection = DriverManager.getConnection(url, username, password);
+			System.out.println("Connection established");
+			return connection;
 
+		} catch(Exception e) {
+			System.out.println(e);
+			}
+		
+		//will only hit this if connection not sucessful
+		return null;
+	}
+*/
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
