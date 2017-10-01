@@ -34,17 +34,64 @@ try {
 */
 
 %>
-
+<!-- 
 <div align="center">
 <form action="SignupServlet" method="post">
-User name : <input type="text" name="user" required="required">
+User name : <input type="text" name="username" required="required">
 Password : <input type="password" name="password" required="required">
+Role : <input type="text" name="role" required="required">
 <input type="submit" value="signup">
 </form>
 
 </div>
+ -->
+ <div align="center">
+<form name="login" method="post" action="SignupServlet">
+		<table>
+			<tbody>
+				<!-- 
+			tr is for the table rows and td is for the columns
+			 -->
+			 	<tr>
+					<td>First Name : </td>
+					<td><input type="text" name="firstName" required="required"></td>
+				</tr>
+				<tr>
+					<td>Last Name : </td>
+					<td><input type="text" name="lastname" required="required"></td>
+				</tr>
+				<tr>
+					<td>User Name : </td>
+					<td><input type="text" name="username" required="required"></td>
+				</tr>
+				<tr>
+					<td>Password : </td>
+					<td><input type="password" name="password" required="required"></td>
+				</tr>
 
 
+				<tr>
+					<td>Roles : </td>
+					<td><select name="role" required="required">
+							<option value="Supplier">Supplier</option>
+							<option value="Wholesaler">Wholesaler</option>
+							<option value="Retailer">Retailer</option>
+							<option value="Customer">Customer</option>
+
+					</select></td>
+				</tr>
+
+				<tr>
+
+					<td><input type="submit" value="submit"></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+		
+	</form>
+</div>
 
 </body>
 </html>
