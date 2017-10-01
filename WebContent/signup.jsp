@@ -10,16 +10,17 @@
 <body>
 
 <%
+/*/For initial testing connection to database
 Connection connection = null;
 try {
-	/*
+	
 	String driver = "com.mysql.jdbc.Driver";
 	//where the databse is located
 	String url = "jdbc:mysql://localhost:3306/database"; 
 	String username = "arnold";
 	String password = "422981a1";
 	Class.forName(driver);
-	*/
+	
 	Class.forName("com.mysql.jdbc.Driver");
 	connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/portal", "root", "");
 	
@@ -30,8 +31,7 @@ try {
 } catch(Exception e) {
 	out.print("connection not made");
 	}
-
-
+*/
 
 %>
 

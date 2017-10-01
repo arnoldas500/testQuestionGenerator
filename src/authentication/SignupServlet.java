@@ -47,12 +47,12 @@ public class SignupServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			//creating sql queery from above data
 			//user is the actual sql table name and name and password is what it takes
-			String sql = "insert into User(name,password) values(?,?)";
+			String sql = "insert into registration(name,password) values(?,?)";
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "authentication:mysql://localhost:3306/portal";
+			String url = "jdbc:mysql://localhost:3306/portal";
 			String username = "root";
-			String passwordSQL = "422981a1";
+			String passwordSQL = "";
 			Connection connection = DriverManager.getConnection(url,username,passwordSQL);
 			
 			PreparedStatement ps = connection.prepareStatement(sql);
