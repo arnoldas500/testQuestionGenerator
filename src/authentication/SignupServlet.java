@@ -50,7 +50,7 @@ public class SignupServlet extends HttpServlet {
 			String sql = "insert into User(name,password) values(?,?)";
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/myNewConnection";
+			String url = "authentication:mysql://localhost:3306/portal";
 			String username = "root";
 			String passwordSQL = "422981a1";
 			Connection connection = DriverManager.getConnection(url,username,passwordSQL);

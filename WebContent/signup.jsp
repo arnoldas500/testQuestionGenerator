@@ -21,7 +21,7 @@ try {
 	Class.forName(driver);
 	*/
 	Class.forName("com.mysql.jdbc.Driver");
-	connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "1234");
+	connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/portal", "root", "");
 	
 	if(connection != null){
 		out.print("Connection established");
@@ -31,7 +31,9 @@ try {
 	out.print("connection not made");
 	}
 
-/*
+
+
+%>
 
 <div align="center">
 <form action="SignupServlet" method="post">
@@ -41,11 +43,6 @@ Password : <input type="password" name="password" required="required">
 </form>
 
 </div>
-
-*/
-
-%>
-
 
 
 
