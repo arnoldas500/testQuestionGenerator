@@ -1,4 +1,36 @@
 
+//****REMOVED FROM WEB.XML
+/*
+ * 
+<display-name>login</display-name>
+  <servlet>
+  <servlet-name>reg</servlet-name>
+  <servlet-class>jdbc.SignupServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>reg</servlet-name>
+  <url-pattern>/regServlet</url-pattern>
+  
+  </servlet-mapping>
+  
+  
+  <servlet>
+  <servlet-name>login</servlet-name>
+  <servlet-class>jdbc.Login</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>login</servlet-name>
+  <url-pattern>/LoginServlet</url-pattern>
+  
+  </servlet-mapping>
+ * 
+ * 
+ */
+
+
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -148,10 +180,11 @@ public class LoginServlet extends HttpServlet {
 			String roles = request.getParameter("roles");
 			String dbName = null;
 			String dbPassword = null;
-			String dbRole = null;
+			//String dbRole = null;
 			
 			//creating sql queery from above data to fetch the data from the mySQL database
-			String sql = "select * from User where username=? and password=? and role=?";
+			//String sql = "select * from User where username=? and password=? and role=?";
+			String sql = "select * from User where username=? and password=?";
 			//String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
 			
 			Class.forName("com.mysql.jdbc.Driver");
@@ -165,15 +198,16 @@ public class LoginServlet extends HttpServlet {
 			try(PreparedStatement ps = connection.prepareStatement(sql)){
 				ps.setString(1, username);
 				ps.setString(2, password);
-				ps.setString(3, roles);
+				//ps.setString(3, roles);
 				//fetch the data and store it somewhere 
 				ResultSet resultSet = ps.executeQuery();
 				PrintWriter out = response.getWriter();
 				while(resultSet.next()) {
-					dbName = resultSet.getString(2);
+					dbName = resultSet.getString("username");
 					dbPassword = resultSet.getString("password");
-					dbRole = resultSet.getString("role");
+					//dbRole = resultSet.getString("role");
 				}
+				/*
 				//checking if information actually exist in the database
 				if(username.equals(dbName) && password.equals(dbPassword) && roles.equals(dbRole)) {
 					out.println("You have successfully signed in!");
@@ -182,77 +216,83 @@ public class LoginServlet extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 					rd.include(request, response); //could also use forward instead of include
 				}
-			}
-			
-			if (usernameUpper.equals("ICSI518") && password.equals("Fall2017")) {
-				// if login is successfull then redirect to members jsp page
-				// request.getSession().removeAttribute("errorMessage");
-				// response.sendRedirect("members.jsp");
-				if (roles.equals("Supplier")) {
-					request.getSession().setAttribute("currentUser", username);
-					request.getRequestDispatcher("Supplier.jsp").forward(request, response);
-					// request.setAttribute("currentDate", "Please enter username.");
-				}
-
-				if (roles.equals("Wholesaler")) {
-					request.getSession().setAttribute("currentUser", username);
-					request.getRequestDispatcher("Wholesaler.jsp").forward(request, response);
-				}
-				
-				if (roles.equals("Retailer")) {
-					request.getSession().setAttribute("currentUser", username);
-					request.getRequestDispatcher("Retailer.jsp").forward(request, response);
-				}
-				
-				if (roles.equals("Customer")) {
-					request.getSession().setAttribute("currentUser", username);
-					request.getRequestDispatcher("Customer.jsp").forward(request, response);
-				}
-
-				// request.getRequestDispatcher("members.jsp").forward(request, response);
-			} else { // if the username or password incorrect will go here
-				// if not succesfull redirect to error.jsp
-				// response.sendRedirect("error.jsp");
-				// request.getSession().removeAttribute("errorMessage");
-				if (usernameUpper.isEmpty() && password.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter username and password.");
-				}
-				 else if (usernameUpper.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter username.");
-				} else if (password.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter password.");
-				} else {
-					request.setAttribute("errorMessage", "Invalid username and password.");
-				}
-				
-				/*
-				***TESTING to see if random input and some field left blank***
-				{ // if the username or password incorrect will go here
-				// if not succesfull redirect to error.jsp
-				// response.sendRedirect("error.jsp");
-				// request.getSession().removeAttribute("errorMessage");
-				if (usernameUpper.equals("ICSI518") && password.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter password.");
-				} else if (usernameUpper.isEmpty() && password.equals("Fall2017")) {
-					request.setAttribute("errorMessage", "Please enter username.");
-				} else if (usernameUpper.isEmpty() && password.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter username and password.");
-				} else {
-					request.setAttribute("errorMessage", "Invalid username and password.");
-				}
-				
-				
-				
 				*/
 				
-				/*
-				 * if(!(username.equals("ICSI518")) && !(password.equals("Fall2017"))) {
-				 * request.getSession().setAttribute("errorMessage",
-				 * "Invalid username and password."); }
-				 */
-				// request.getSession().setAttribute("errorMessage", "Please enter username and
-				// password");
-				request.getRequestDispatcher("Login.jsp").forward(request, response); //could also use include 
+				//if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
+				if (username.equals(dbName) && password.equals(dbPassword)) {
+					// if login is successfull then redirect to members jsp page
+					// request.getSession().removeAttribute("errorMessage");
+					// response.sendRedirect("members.jsp");
+					if (roles.equals("Supplier")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Supplier.jsp").forward(request, response);
+						// request.setAttribute("currentDate", "Please enter username.");
+					}
+
+					if (roles.equals("Wholesaler")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Wholesaler.jsp").forward(request, response);
+					}
+					
+					if (roles.equals("Retailer")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Retailer.jsp").forward(request, response);
+					}
+					
+					if (roles.equals("Customer")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Customer.jsp").forward(request, response);
+					}
+
+					// request.getRequestDispatcher("members.jsp").forward(request, response);
+				} else { // if the username or password incorrect will go here
+					// if not succesfull redirect to error.jsp
+					// response.sendRedirect("error.jsp");
+					// request.getSession().removeAttribute("errorMessage");
+					
+					//if (usernameUpper.isEmpty() && password.isEmpty()) {
+					if (username.isEmpty() && password.isEmpty()) {
+						request.setAttribute("errorMessage", "Please enter username and password.");
+					}
+					//else if (usernameUpper.isEmpty()) {
+					 else if (username.isEmpty()) {
+						request.setAttribute("errorMessage", "Please enter username.");
+					} else if (password.isEmpty()) {
+						request.setAttribute("errorMessage", "Please enter password.");
+					} else {
+						request.setAttribute("errorMessage", "Invalid username and password.");
+					}
+					
+					/*
+					***TESTING to see if random input and some field left blank***
+					{ // if the username or password incorrect will go here
+					// if not succesfull redirect to error.jsp
+					// response.sendRedirect("error.jsp");
+					// request.getSession().removeAttribute("errorMessage");
+					if (usernameUpper.equals("ICSI518") && password.isEmpty()) {
+						request.setAttribute("errorMessage", "Please enter password.");
+					} else if (usernameUpper.isEmpty() && password.equals("Fall2017")) {
+						request.setAttribute("errorMessage", "Please enter username.");
+					} else if (usernameUpper.isEmpty() && password.isEmpty()) {
+						request.setAttribute("errorMessage", "Please enter username and password.");
+					} else {
+						request.setAttribute("errorMessage", "Invalid username and password.");
+					}
+					
+					
+					
+					*/
+					
+					/*
+					 * if(!(username.equals("ICSI518")) && !(password.equals("Fall2017"))) {
+					 * request.getSession().setAttribute("errorMessage",
+					 * "Invalid username and password."); }
+					 */
+					// request.getSession().setAttribute("errorMessage", "Please enter username and
+					// password");
+					request.getRequestDispatcher("Login.jsp").forward(request, response); //could also use include 
+				}
+				
 			}
 			
 		} catch (ClassNotFoundException e) {
