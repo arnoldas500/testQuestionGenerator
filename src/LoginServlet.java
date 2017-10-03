@@ -260,7 +260,7 @@ public class LoginServlet extends HttpServlet {
 					} else if (password.isEmpty()) {
 						request.setAttribute("errorMessage", "Please enter password.");
 					} else {
-						request.setAttribute("errorMessage", "Invalid username and password.");
+						request.setAttribute("errorMessage", "Your information does not exist!");
 					}
 					
 					/*

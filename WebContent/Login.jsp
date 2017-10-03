@@ -11,6 +11,9 @@ comand shit f to format everything after selecting
 </head>
 <body>
 	<h1>Login Page</h1>
+		
+	<%@include file="nav.jsp" %>
+	
 	<!-- 
 	the login form //the action is where you want to go when someone
 	clicks submits //logincheck is a servlet which i create so when you
