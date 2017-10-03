@@ -63,9 +63,10 @@ comand shit f to format everything after selecting
 
 			</tbody>
 		</table>
-
+<!--
+WORKS BUT TAKING OUT FOR NOW 
 		<input type="reset" value="Clear" name="clear" />
-
+ -->
 		<div style="color: #FF0000;">${errorMessage}</div>
 		<!-- <c:remove var="errorMessage" scope="session" />  -->
 	</form>

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -48,10 +49,12 @@ public class SignupServlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String role = request.getParameter("role");
+			String dbName = null;
 			//creating sql queery from above data
 			//user is the actual sql table name and name and password is what it takes
 			String sql = "insert into User(username,password,role) values(?,?,?)";
 			String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+			//String sqlGet = "select * from User where username=?";
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/portal";
@@ -82,6 +85,50 @@ public class SignupServlet extends HttpServlet {
 		        stmt.executeUpdate();
 		    }
 		   */
+			/*
+			try(PreparedStatement psGet = connection.prepareStatement(sqlGet)){
+				//psGet.setString(1, username);
+				//ps.setString(2, password);
+				//ps.setString(3, roles);
+				//fetch the data and store it somewhere 
+				ResultSet resultSet = psGet.executeQuery();
+				//PrintWriter out = response.getWriter();
+				while(resultSet.next()) {
+					dbName = resultSet.getString(1);
+					//dbPassword = resultSet.getString("password");
+					//dbRole = resultSet.getString("role");
+				}
+			}
+		*/
+			//if (username.equals(dbName) && password.equals(dbPassword)) {
+				// if the username or password incorrect will go here
+				// if not succesfull redirect to error.jsp
+				// response.sendRedirect("error.jsp");
+				// request.getSession().removeAttribute("errorMessage");
+				
+				//if (usernameUpper.isEmpty() && password.isEmpty()) {
+				if (username.equals(dbName)) {
+					request.setAttribute("errorMessage", "Username existed!");
+				}
+				//else if (usernameUpper.isEmpty()) {
+				  else if (password.isEmpty()) {
+					request.setAttribute("errorMessage", "Please enter password.");
+				}
+				  else if (username.isEmpty()) {
+					request.setAttribute("errorMessage", "Please enter username.");
+				} 
+				  else if (firstName.isEmpty()) {
+						request.setAttribute("errorMessage", "Please enter first name.");
+					}
+				  else if (lastname.isEmpty()) {
+						request.setAttribute("errorMessage", "Please enter lastname.");
+					}
+				  else {
+					request.setAttribute("errorMessage", "Username existed");
+				}
+				
+				request.getRequestDispatcher("signup.jsp").forward(request, response); //could also use include 
+			//}
 			
 			
 			//print out what was executed
@@ -90,13 +137,27 @@ public class SignupServlet extends HttpServlet {
 			//***DONT FORGET TO UPDATE WEB.XML under WEB-INF
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
+			//sendErrorRedirect(request, response, "/signup.jsp", e);
+			//request.setAttribute("errorMessage", "Username existed");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			request.setAttribute("errorMessage", "Username existed");
 			e.printStackTrace();
 		}
 		
 		//doGet(request, response);
+	}
+
+	private void sendErrorRedirect(HttpServletRequest request, HttpServletResponse response, String string,
+			ClassNotFoundException e) {
+		// TODO Auto-generated method stub
+		try {
+            request.setAttribute ("javax.servlet.jsp.jspException", e);
+            getServletConfig().getServletContext().getRequestDispatcher(string).forward(request, response);
+      } catch (Exception ex) {
+           //putError("serXXXXX.sendErrorRedirect ", ex);
+      }
 	}
 
 }

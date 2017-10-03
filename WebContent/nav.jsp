@@ -11,7 +11,7 @@
 <body>
 	<form name="nav">
 
-		<ul>
+		<ul class="tab-group">
 			<li><a href="Supplier.jsp">Supplier</a></li>
 			<li><a href="Customer.jsp">Customer</a></li>
 			<li><a href="Retailer.jsp">Retailer</a></li>
