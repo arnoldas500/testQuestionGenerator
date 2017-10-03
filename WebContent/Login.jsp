@@ -8,8 +8,15 @@ comand shit f to format everything after selecting
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+ <link rel="stylesheet" href="css/style.css">
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
 </head>
-<body>
+<body class="align">
 	<h1>Login Page</h1>
 		
 	<%@include file="nav.jsp" %>
@@ -19,7 +26,10 @@ comand shit f to format everything after selecting
 	clicks submits //logincheck is a servlet which i create so when you
 	click login //you go from the jsp to the servlet
 	 -->
-	<form name="login" method="post" action="LoginServlet">
+	 
+	 
+	 
+	<form name="login" method="post" action="LoginServlet" class="form login">
 		<table>
 			<tbody>
 				<!-- 
@@ -27,11 +37,11 @@ comand shit f to format everything after selecting
 			 -->
 				<tr>
 					<td>User Name</td>
-					<td><input type="text" name="username"></td>
+					<td><input type="text" name="username" class="form__input"></td>
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="password" name="password"></td>
+					<td><input type="password" name="password" class="form__input"></td>
 				</tr>
 
 
@@ -59,5 +69,9 @@ comand shit f to format everything after selecting
 		<div style="color: #FF0000;">${errorMessage}</div>
 		<!-- <c:remove var="errorMessage" scope="session" />  -->
 	</form>
+	<p class="text--center">Not a member? <a href="signup.jsp">Sign up now</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
+	
+	
+	
 </body>
 </html>

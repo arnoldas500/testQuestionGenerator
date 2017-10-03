@@ -178,6 +178,7 @@ public class LoginServlet extends HttpServlet {
 			String usernameUpper = username.toUpperCase();
 			String password = request.getParameter("password");
 			String roles = request.getParameter("roles");
+			//String signUp = request.getParameter("signUp");
 			String dbName = null;
 			String dbPassword = null;
 			//String dbRole = null;
@@ -217,6 +218,7 @@ public class LoginServlet extends HttpServlet {
 					rd.include(request, response); //could also use forward instead of include
 				}
 				*/
+				
 				
 				//if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
 				if (username.equals(dbName) && password.equals(dbPassword)) {
