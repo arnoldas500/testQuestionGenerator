@@ -126,8 +126,8 @@ public class SignupServlet extends HttpServlet {
 				  else {
 					request.setAttribute("errorMessage", "Username existed");
 				}
-				
-				request.getRequestDispatcher("signup.jsp").forward(request, response); //could also use include 
+				// could possible do else if everything is correct redirect to appropriate role page
+				//request.getRequestDispatcher("signup.jsp").forward(request, response); //could also use include 
 			//}
 			
 			

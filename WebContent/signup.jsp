@@ -54,19 +54,19 @@ Role : <input type="text" name="role" required="required">
 			 -->
 			 	<tr>
 					<td>First Name : </td>
-					<td><input type="text" name="firstName" ></td>
+					<td><input type="text" name="firstName" required="required"></td>
 				</tr>
 				<tr>
 					<td>Last Name : </td>
-					<td><input type="text" name="lastname" ></td>
+					<td><input type="text" name="lastname" required="required"></td>
 				</tr>
 				<tr>
 					<td>User Name : </td>
-					<td><input type="text" name="username" ></td>
+					<td><input type="text" name="username" required="required"></td>
 				</tr>
 				<tr>
 					<td>Password : </td>
-					<td><input type="password" name="password" ></td>
+					<td><input type="password" name="password" required="required"></td>
 				</tr>
 
 
