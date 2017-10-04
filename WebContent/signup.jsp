@@ -18,7 +18,7 @@ try {
 	//where the databse is located
 	String url = "jdbc:mysql://localhost:3306/database"; 
 	String username = "arnold";
-	String password = "422981a1";
+	
 	Class.forName(driver);
 	
 	Class.forName("com.mysql.jdbc.Driver");
@@ -51,6 +51,10 @@ Role : <input type="text" name="role" required="required">
 			<tbody>
 				<!-- 
 			tr is for the table rows and td is for the columns
+			<form>
+<input type="email" pattern="[^@]*@[^@]" required oninvalid="this.setCustomValidity('Put  here custom message')"/>
+<input type="submit"/>
+</form>
 			 -->
 			 	<tr>
 					<td>First Name : </td>

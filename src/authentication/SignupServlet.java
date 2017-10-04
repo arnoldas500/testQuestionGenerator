@@ -106,29 +106,31 @@ public class SignupServlet extends HttpServlet {
 				// response.sendRedirect("error.jsp");
 				// request.getSession().removeAttribute("errorMessage");
 				
-				//if (usernameUpper.isEmpty() && password.isEmpty()) {
-				if (username.equals(dbName)) {
-					request.setAttribute("errorMessage", "Username existed!");
+			//if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
+			
+			/*
+				if (username.isEmpty() && password.isEmpty()) {
+					request.setAttribute("errorMessage", "Please enter username and password.");
 				}
 				//else if (usernameUpper.isEmpty()) {
-				  else if (password.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter password.");
-				}
-				  else if (username.isEmpty()) {
+				 else if (username.isEmpty()) {
 					request.setAttribute("errorMessage", "Please enter username.");
+				} else if (password.isEmpty()) {
+					request.setAttribute("errorMessage", "Please enter password.");
 				} 
-				  else if (firstName.isEmpty()) {
-						request.setAttribute("errorMessage", "Please enter first name.");
-					}
-				  else if (lastname.isEmpty()) {
-						request.setAttribute("errorMessage", "Please enter lastname.");
-					}
-				  else {
-					request.setAttribute("errorMessage", "Username existed");
+				else if (firstName.isEmpty()) {
+					request.setAttribute("errorMessage", "Please enter first name.");
 				}
-				// could possible do else if everything is correct redirect to appropriate role page
-				//request.getRequestDispatcher("signup.jsp").forward(request, response); //could also use include 
-			//}
+				else if (lastname.isEmpty()) {
+					request.setAttribute("errorMessage", "Please enter last name.");
+				}
+				else {
+					request.setAttribute("errorMessage", "Your information does not exist!");
+				}
+				
+				
+				request.getRequestDispatcher("Login.jsp").forward(request, response); //could also use include 
+			*/
 			
 			
 			//print out what was executed
