@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.AuthDAO;
-import model.ModelMVC;
 import model.User;
+
 
 
 /**
@@ -57,7 +57,7 @@ public class SignupServlet extends HttpServlet {
 		String dbName2 = null;
 		
 		//setting all the values in the model class object
-		ModelMVC m = new ModelMVC();
+		User m = new User();
 		m.setFirstname(firstName);
 		m.setLastname(lastname);
 		m.setUsername(username);

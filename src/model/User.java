@@ -1,35 +1,13 @@
 package model;
 
 public class User {
-	public User() {
-		super();
-	}
-	/*
-	 String firstName = request.getParameter("firstName");
-			String lastname = request.getParameter("lastname");
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
-			String role = request.getParameter("role");
-	 */
+
 	public String firstname;
 	public String lastname;
 	public String username;
 	public String password;
 	public String role;
 	public String dbName;
-	
-	/**
-	 * @return the dbName
-	 */
-	public String getDbName() {
-		return dbName;
-	}
-	/**
-	 * @param dbName the dbName to set
-	 */
-	public void setDbName(String dbName) {
-		this.dbName = dbName;
-	}
 	/**
 	 * @return the firstname
 	 */
@@ -90,6 +68,17 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	/**
+	 * @return the dbName
+	 */
+	public String getDbName() {
+		return dbName;
+	}
+	/**
+	 * @param dbName the dbName to set
+	 */
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
 	
-	 
 }

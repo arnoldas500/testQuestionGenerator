@@ -32,7 +32,7 @@ public class AuthDAO {
 		return connection;
 	}
 
-	public static int checkUserNameAvailable(ModelMVC m, String sql3) {
+	public static int checkUserNameAvailable(User m, String sql3) {
 		//String sql3 = "select * from User where username=?";
 		int k = 0;
 		String dbName2 = null;
@@ -67,7 +67,7 @@ public class AuthDAO {
 	}
 	
 	//method to insert new users into database
-	public static int signupUser(ModelMVC m, String sql) {
+	public static int signupUser(User m, String sql) {
 		//String sql = "insert into User(username,password,role) values(?,?,?)";
 		int i = 0;
 		Connection connection = connect();
@@ -86,7 +86,7 @@ public class AuthDAO {
 		return i;
 	}
 
-	public static int signupUser_Profile(ModelMVC m, String sql2) {
+	public static int signupUser_Profile(User m, String sql2) {
 		// String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
 		int j = 0;
 		Connection connection = connect();
