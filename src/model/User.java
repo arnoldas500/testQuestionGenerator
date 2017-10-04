@@ -16,6 +16,20 @@ public class User {
 	public String username;
 	public String password;
 	public String role;
+	public String dbName;
+	
+	/**
+	 * @return the dbName
+	 */
+	public String getDbName() {
+		return dbName;
+	}
+	/**
+	 * @param dbName the dbName to set
+	 */
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
 	/**
 	 * @return the firstname
 	 */

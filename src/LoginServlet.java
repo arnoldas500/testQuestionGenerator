@@ -46,6 +46,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -169,6 +171,8 @@ public class LoginServlet extends HttpServlet {
 			 * 
 			 */
 			
+			User jb2 = new User();
+			
 			// this is where control will go from the jsp login post method
 			// this is where i check if the username and password are valid or not
 			// doGet(request, response);
@@ -199,6 +203,7 @@ public class LoginServlet extends HttpServlet {
 			try(PreparedStatement ps = connection.prepareStatement(sql)){
 				ps.setString(1, username);
 				ps.setString(2, password);
+				//ps.setString("jb2", jb2);
 				//ps.setString(3, roles);
 				//fetch the data and store it somewhere 
 				ResultSet resultSet = ps.executeQuery();
@@ -208,6 +213,9 @@ public class LoginServlet extends HttpServlet {
 					dbPassword = resultSet.getString("password");
 					//dbRole = resultSet.getString("role");
 				}
+				
+				jb2.setDbName(dbName);
+				
 				/*
 				//checking if information actually exist in the database
 				if(username.equals(dbName) && password.equals(dbPassword) && roles.equals(dbRole)) {

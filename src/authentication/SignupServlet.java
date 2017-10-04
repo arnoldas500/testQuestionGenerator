@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
+
+
 /**
  * Servlet implementation class SignupServlet
  */
@@ -43,6 +46,9 @@ public class SignupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
+			//for javabean
+			User jb = new User();
+			
 			//fetching the data and storing in local variable 
 			String firstName = request.getParameter("firstName");
 			String lastname = request.getParameter("lastname");
@@ -50,6 +56,13 @@ public class SignupServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String role = request.getParameter("role");
 			String dbName = null;
+			
+			jb.setFirstname(firstName);
+			jb.setLastname(lastname);
+			jb.setUsername(username);
+			jb.setPassword(password);
+			jb.setRole(role);
+			
 			//creating sql queery from above data
 			//user is the actual sql table name and name and password is what it takes
 			String sql = "insert into User(username,password,role) values(?,?,?)";
@@ -61,6 +74,8 @@ public class SignupServlet extends HttpServlet {
 			String usernameSQL = "root";
 			String passwordSQL = "";
 			Connection connection = DriverManager.getConnection(url,usernameSQL,passwordSQL);
+			
+			
 			
 			//execute sql command for users table
 			try(PreparedStatement ps = connection.prepareStatement(sql)){
@@ -107,16 +122,16 @@ public class SignupServlet extends HttpServlet {
 				// request.getSession().removeAttribute("errorMessage");
 				
 			//if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
+				String jbUser = jb.getDbName();
 			
-			/*
-				if (username.isEmpty() && password.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter username and password.");
+				if (username.equals(jbUser)) {
+					request.setAttribute("errorMessage", "Username exist in database!");
 				}
 				//else if (usernameUpper.isEmpty()) {
-				 else if (username.isEmpty()) {
-					request.setAttribute("errorMessage", "Please enter username.");
-				} else if (password.isEmpty()) {
+				 else if (password.isEmpty()) {
 					request.setAttribute("errorMessage", "Please enter password.");
+				} else if (username.isEmpty()) {
+					request.setAttribute("errorMessage", "Please enter username.");
 				} 
 				else if (firstName.isEmpty()) {
 					request.setAttribute("errorMessage", "Please enter first name.");
@@ -125,12 +140,31 @@ public class SignupServlet extends HttpServlet {
 					request.setAttribute("errorMessage", "Please enter last name.");
 				}
 				else {
-					request.setAttribute("errorMessage", "Your information does not exist!");
+					if (role.equals("Supplier")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Supplier.jsp").forward(request, response);
+						// request.setAttribute("currentDate", "Please enter username.");
+					}
+
+					if (role.equals("Wholesaler")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Wholesaler.jsp").forward(request, response);
+					}
+					
+					if (role.equals("Retailer")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Retailer.jsp").forward(request, response);
+					}
+					
+					if (role.equals("Customer")) {
+						request.getSession().setAttribute("currentUser", username);
+						request.getRequestDispatcher("Customer.jsp").forward(request, response);
+					}
 				}
 				
 				
-				request.getRequestDispatcher("Login.jsp").forward(request, response); //could also use include 
-			*/
+				request.getRequestDispatcher("signup.jsp").forward(request, response); //could also use include 
+			
 			
 			
 			//print out what was executed
