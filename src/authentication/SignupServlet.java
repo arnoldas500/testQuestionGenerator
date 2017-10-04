@@ -64,16 +64,37 @@ public class SignupServlet extends HttpServlet {
 		m.setPassword(password);
 		m.setRole(role);
 		
+		String sql3 = "select * from User where username=?";
+		int k = AuthDAO.checkUserNameAvailable(m,sql3);
+		if(k != 0 ) {
+			System.out.println("Youre Good Username doesnt exist!");
+			
+		}else {
+			System.out.println("Error! Username already exists!");
+		}
+		
 		//calling a method in DAO class to inset data into table
 		String sql = "insert into User(username,password,role) values(?,?,?)";
 		int i = AuthDAO.signupUser(m,sql);
 		
 		if(i != 0 ) {
-			System.out.println("Values inserted successfully into database!");
+			System.out.println("Values inserted successfully into User table!");
 			
 		}else {
-			System.out.println("Error! Values not inserted into the database!");
+			System.out.println("Error! Values not inserted into User table!");
 		}
+		
+		String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+		int j = AuthDAO.signupUser_Profile(m,sql2);
+		
+		if(j != 0 ) {
+			System.out.println("Values inserted successfully into User_Profile table!");
+			
+		}else {
+			System.out.println("Error! Values not inserted into User_Profile table!");
+		}
+		
+		
 		
 //		try {
 //			//for javabean
