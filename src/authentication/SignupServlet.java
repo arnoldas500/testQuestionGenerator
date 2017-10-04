@@ -55,18 +55,19 @@ public class SignupServlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String role = request.getParameter("role");
-			String dbName = null;
+			String dbName2 = null;
 			
 			jb.setFirstname(firstName);
 			jb.setLastname(lastname);
-			jb.setUsername(username);
+	//		jb.setUsername(username);
 			jb.setPassword(password);
 			jb.setRole(role);
 			
 			//creating sql queery from above data
 			//user is the actual sql table name and name and password is what it takes
-			String sql = "insert into User(username,password,role) values(?,?,?)";
-			String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+//			String sql = "insert into User(username,password,role) values(?,?,?)";
+//			String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+			String sql3 = "select * from User where username=?";
 			//String sqlGet = "select * from User where username=?";
 			
 			Class.forName("com.mysql.jdbc.Driver");
@@ -77,22 +78,7 @@ public class SignupServlet extends HttpServlet {
 			
 			
 			
-			//execute sql command for users table
-			try(PreparedStatement ps = connection.prepareStatement(sql)){
-				ps.setString(1, username);
-				ps.setString(2, password);
-				ps.setString(3, role);
-				//now need to execute this statement
-				ps.executeUpdate();
-			}
 			
-			//execute sql command for users profile table
-			try(PreparedStatement ps2 = connection.prepareStatement(sql2)){
-				ps2.setString(1, firstName);
-				ps2.setString(2, lastname);
-				//now need to execute this statement
-				ps2.executeUpdate();
-			}
 			/*
 			try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO PUBLISHER (CODE, PUBLISHER_NAME) VALUES (?, ?)")) {
 		        stmt.setString(1, book.getPublisher().getCode());   
@@ -122,13 +108,65 @@ public class SignupServlet extends HttpServlet {
 				// request.getSession().removeAttribute("errorMessage");
 				
 			//if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
-				String jbUser = jb.getDbName();
 			
-				if (username.equals(jbUser)) {
-					request.setAttribute("errorMessage", "Username exist in database!");
+			try(PreparedStatement ps3 = connection.prepareStatement(sql3)){
+				ps3.setString(1, username);
+				//ps3.setString(2, password);
+				//ps.setString("jb2", jb2);
+				//ps.setString(3, roles);
+				//fetch the data and store it somewhere 
+				ResultSet resultSet = ps3.executeQuery();
+				//PrintWriter out = response.getWriter();
+				while(resultSet.next()) {
+					dbName2 = resultSet.getString("username");
+					//dbPassword = resultSet.getString("password");
+					//dbRole = resultSet.getString("role");
 				}
+				
+				if (username.equals(dbName2)) {
+					PrintWriter out4 = response.getWriter();
+					out4.println("jbUSEr is **************  "+dbName2);
+					request.setAttribute("errorMessage", "Username exist in database!");
+					//request.getRequestDispatcher("signup.jsp").forward(request, response); //could also use include 
+				}else {
+					String sql = "insert into User(username,password,role) values(?,?,?)";
+					String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+				//execute sql command for users table
+				try(PreparedStatement ps = connection.prepareStatement(sql)){
+					ps.setString(1, username);
+					ps.setString(2, password);
+					ps.setString(3, role);
+					//now need to execute this statement
+					ps.executeUpdate();
+				}
+				
+				//execute sql command for users profile table
+				try(PreparedStatement ps2 = connection.prepareStatement(sql2)){
+					ps2.setString(1, firstName);
+					ps2.setString(2, lastname);
+					//now need to execute this statement
+					ps2.executeUpdate();
+				}
+				}
+				/*
+				jb.setDbName(dbName2);
+				
+				String test = jb.getDbName();
+				PrintWriter out2 = response.getWriter();
+				out2.println("jbUSEr is **************  "+test);
+			
+				String jbUser = jb.getDbName();
+				System.out.println("jbUSEr is **************  "+jbUser);
+				PrintWriter out5 = response.getWriter();
+				out5.println("jbUSEr is **************  "+jbUser);
+				*/
+	//			if (username.equals(dbName2)) {
+	//				//PrintWriter out4 = response.getWriter();
+	//				//out4.println("jbUSEr is **************  "+jbUser);
+	//				request.setAttribute("errorMessage", "Username exist in database!");
+	//			}
 				//else if (usernameUpper.isEmpty()) {
-				 else if (password.isEmpty()) {
+				 if (password.isEmpty()) {
 					request.setAttribute("errorMessage", "Please enter password.");
 				} else if (username.isEmpty()) {
 					request.setAttribute("errorMessage", "Please enter username.");
@@ -164,12 +202,12 @@ public class SignupServlet extends HttpServlet {
 				
 				
 				request.getRequestDispatcher("signup.jsp").forward(request, response); //could also use include 
-			
+			}
 			
 			
 			//print out what was executed
-			PrintWriter out = response.getWriter();
-			out.println("You have successfully signed up!");
+			PrintWriter out3 = response.getWriter();
+			out3.println("You have successfully signed up!");
 			//***DONT FORGET TO UPDATE WEB.XML under WEB-INF
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

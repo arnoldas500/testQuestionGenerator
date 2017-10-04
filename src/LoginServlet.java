@@ -216,6 +216,10 @@ public class LoginServlet extends HttpServlet {
 				
 				jb2.setDbName(dbName);
 				
+				String test = jb2.getDbName();
+				PrintWriter out2 = response.getWriter();
+				out2.println("jbUSEr is **************  "+test);
+				
 				/*
 				//checking if information actually exist in the database
 				if(username.equals(dbName) && password.equals(dbPassword) && roles.equals(dbRole)) {
