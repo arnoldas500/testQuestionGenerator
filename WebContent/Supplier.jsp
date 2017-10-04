@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%@include file="nav.jsp" %>
 </head>
 <body>
 
@@ -22,11 +23,13 @@
          //out.print( "<h2 align = \"center\">" +date.toString()+"</h2>");
          out.print( date.toString());
          
+         /*
          out.println("<form action=\"logout.jsp\" method=\"post\">");
          out.println("<input type=\"submit\" name=\"logout\" value=\"Logout\">");
          out.println("</form>");
+         */
       %>
-      
+      <%@include file="logout.jsp" %>
       
 
 	</div>

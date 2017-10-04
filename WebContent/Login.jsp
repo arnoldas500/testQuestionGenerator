@@ -8,7 +8,7 @@ comand shit f to format everything after selecting
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<%@include file="nav.jsp" %>
  <link rel="stylesheet" href="css/style.css">
  
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,9 +17,9 @@ comand shit f to format everything after selecting
 
 </head>
 <body class="align">
-	<h1>Login Page</h1>
+	<h4> ---------- </h4>
 		
-	<%@include file="nav.jsp" %>
+	
 	
 	<!-- 
 	the login form //the action is where you want to go when someone

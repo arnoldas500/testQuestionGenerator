@@ -13,14 +13,19 @@
 out.println("<form action=\"logout.jsp\" method=\"post\">");
 out.println("<input type=\"submit\" name=\"logout\" value=\"Logout\">");
 out.println("</form>");
-*/
+
+
 
 //destroyung session with invalidate method and then creating a frsh new session with no username attribute
 session.invalidate();
 session = request.getSession();
 response.sendRedirect("Login.jsp");
-
+*/
 %>
+
+<form action="LogoutServlet" method="get">
+<input type="submit" name="logout" value="Logout">
+</form>
 
 </body>
 </html>
