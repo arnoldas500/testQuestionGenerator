@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class AuthDAO {
 	
@@ -15,7 +16,7 @@ public class AuthDAO {
 		Connection connection = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/portal";
+			String url = "jdbc:mysql://localhost:3306/csi518";
 			String usernameSQL = "root";
 			String passwordSQL = "";
 			connection = DriverManager.getConnection(url,usernameSQL,passwordSQL);
@@ -102,7 +103,41 @@ public class AuthDAO {
 		return j;
 	}
 
-	
+	//method to get user id
+	public static int getUserId(){
+
+		int ID = -1;
+
+		try(Connection connection = connect())
+		{
+				
+				//SELECT id FROM User WHERE status <> 0 ORDER BY id DESC LIMIT 1
+				//String q0 = "Select id from User ";
+				
+				String q0 = "SELECT userId FROM User ORDER BY userId DESC LIMIT 1";
+				Statement st = connection.createStatement();
+				ResultSet rs = st.executeQuery(q0);
+
+				if(rs.next()){
+					//rs.last(); // Get ID of last User
+					ID = rs.getInt("userId");
+					ID++;
+				}
+				else
+					ID=1; // Empty Table, so start with ID 1
+
+				rs.close();
+				st.close();
+
+				
+
+			}catch(SQLException e){
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}	
+		
+		return ID;
+	}
 
 	
 

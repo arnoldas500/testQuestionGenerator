@@ -54,6 +54,7 @@ public class SignupServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String role = request.getParameter("role");
+		int userId = 0;
 		String dbName2 = null;
 		
 		//setting all the values in the model class object
@@ -92,6 +93,9 @@ public class SignupServlet extends HttpServlet {
 				}else {
 					System.out.println("Error! Values not inserted into User table!");
 				}
+				
+				userId = AuthDAO.getUserId();
+				System.out.println("Current user ID is : " + userId);
 				
 				String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
 				int j = AuthDAO.signupUser_Profile(m,sql2);

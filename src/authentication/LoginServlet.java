@@ -120,7 +120,7 @@ public class LoginServlet extends HttpServlet {
 		String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/portal";
+		String url = "jdbc:mysql://localhost:3306/csi518";
 		String usernameSQL = "root";
 		String passwordSQL = "";
 		Connection connection = DriverManager.getConnection(url,usernameSQL,passwordSQL);
@@ -195,7 +195,7 @@ public class LoginServlet extends HttpServlet {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			String url = "jdbc:mysql://localhost:3306/portal";
+			String url = "jdbc:mysql://localhost:3306/csi518";
 			String usernameSQL = "root";
 			String passwordSQL = "";
 			Connection connection = DriverManager.getConnection(url,usernameSQL,passwordSQL);

@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%@include file="nav.jsp" %>
 </head>
 <body>
 <body>
@@ -22,7 +23,7 @@
          //out.print( "<h2 align = \"center\">" +date.toString()+"</h2>");
          out.print( date.toString());
       %>
-
+	<%@include file="logout.jsp" %>
 	</div>
 </body>
 </html>

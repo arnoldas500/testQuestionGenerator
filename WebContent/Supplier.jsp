@@ -29,9 +29,25 @@
          out.println("</form>");
          */
       %>
-      <%@include file="logout.jsp" %>
+      
       
 
+	</div>
+	<div>
+	<h2>User info:</h2>
+	Username : 
+	<%= request.getSession().getAttribute("currentUser") %>
+	 ; 
+	Role : 
+	<%= request.getSession().getAttribute("role") %>
+	
+	First Name : 
+	<%= request.getSession().getAttribute("firstName") %>
+	,
+	Last Name : 
+	<%= request.getSession().getAttribute("lastName") %>
+	
+	<%@include file="logout.jsp" %>
 	</div>
 </body>
 </html>
