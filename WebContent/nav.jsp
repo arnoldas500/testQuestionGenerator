@@ -11,6 +11,48 @@
 <body>
 	<form name="nav">
 
+<style>
+* {
+padding: 0;
+margin: 0;
+}
+
+
+nav {
+background-color: black;
+height: 50px;
+}
+
+nav ul{
+height: 50px;
+width : 907px;
+margin: 0 auto;
+}
+
+nav ul li {
+list-style-type: none;
+width: 150px;
+float: left;
+border-right: 1px solid #CCC;
+text-align: center;
+}
+
+nav ul li a{
+text-decoration:none;
+color: white;
+line-height: 50px;
+display: block;
+
+}
+
+li a:hover {
+background-color: yellow;
+color: red;
+}
+
+</style>
+
+		<nav>
 		<ul class="tab-group">
 			<li><a href="Supplier.jsp">Supplier</a></li>
 			<li><a href="Customer.jsp">Customer</a></li>
@@ -19,6 +61,7 @@
 			<li><a href="Login.jsp">Login</a></li>
 			<li><a href="signup.jsp">Signup</a></li>
 		</ul>
+		</nav>
 <!-- 
 		ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden;
 		background-color: #333; } li { float: left; } li a { display: block;

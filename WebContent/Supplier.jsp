@@ -21,7 +21,13 @@
          Date date = new Date();
          //out.print( "<h2 align = \"center\">" +date.toString()+"</h2>");
          out.print( date.toString());
+         
+         out.println("<form action=\"logout.jsp\" method=\"post\">");
+         out.println("<input type=\"submit\" name=\"logout\" value=\"Logout\">");
+         out.println("</form>");
       %>
+      
+      
 
 	</div>
 </body>

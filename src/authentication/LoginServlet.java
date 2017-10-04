@@ -1,3 +1,4 @@
+package authentication;
 
 //****REMOVED FROM WEB.XML
 /*

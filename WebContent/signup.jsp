@@ -6,9 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-
+<%@include file="nav.jsp" %>
 <%
 /*/For initial testing connection to database
 Connection connection = null;
