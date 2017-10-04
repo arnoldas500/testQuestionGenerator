@@ -8,6 +8,19 @@ public class User {
 	public String password;
 	public String role;
 	public String dbName;
+	public int userId;
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	/**
 	 * @return the firstname
 	 */
@@ -80,5 +93,6 @@ public class User {
 	public void setDbName(String dbName) {
 		this.dbName = dbName;
 	}
+	
 	
 }

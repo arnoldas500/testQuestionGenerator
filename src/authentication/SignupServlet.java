@@ -95,9 +95,11 @@ public class SignupServlet extends HttpServlet {
 				}
 				
 				userId = AuthDAO.getUserId();
+				userId -=1;
+				m.setUserId(userId);
 				System.out.println("Current user ID is : " + userId);
 				
-				String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+				String sql2 = "insert into User_Profile(userId, firstName,lastname) values(?,?,?)";
 				int j = AuthDAO.signupUser_Profile(m,sql2);
 				
 				if(j != 0 ) {

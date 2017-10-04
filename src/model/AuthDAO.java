@@ -92,8 +92,9 @@ public class AuthDAO {
 		int j = 0;
 		Connection connection = connect();
 		try(PreparedStatement ps2 = connection.prepareStatement(sql2)){
-			ps2.setString(1, m.getFirstname());
-			ps2.setString(2, m.getLastname());
+			ps2.setInt(1, m.getUserId());
+			ps2.setString(2, m.getFirstname());
+			ps2.setString(3, m.getLastname());
 			//now need to execute this statement
 			j = ps2.executeUpdate();
 		} catch (SQLException e) {
