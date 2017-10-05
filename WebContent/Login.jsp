@@ -7,29 +7,31 @@ comand shit f to format everything after selecting
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<%@include file="nav.jsp" %>
- <link rel="stylesheet" href="css/style.css">
- 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login Page</title>
+<%@include file="nav.jsp"%>
+<link rel="stylesheet" href="css/style.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
+	rel="stylesheet">
 
 </head>
 <body class="align">
-	<h4> ---------- </h4>
-		
-	
-	
+	<h4>----------</h4>
+
+
+
 	<!-- 
 	the login form //the action is where you want to go when someone
 	clicks submits //logincheck is a servlet which i create so when you
 	click login //you go from the jsp to the servlet
 	 -->
-	 
-	 
-	 
-	<form name="login" method="post" action="LoginServlet" class="form login">
+
+
+
+	<form name="login" method="post" action="LoginServlet"
+		class="form login">
 		<table>
 			<tbody>
 				<!-- 
@@ -63,16 +65,21 @@ comand shit f to format everything after selecting
 
 			</tbody>
 		</table>
-<!--
+		<!--
 WORKS BUT TAKING OUT FOR NOW 
 		<input type="reset" value="Clear" name="clear" />
  -->
 		<div style="color: #FF0000;">${errorMessage}</div>
 		<!-- <c:remove var="errorMessage" scope="session" />  -->
 	</form>
-	<p class="text--center">Not a member? <a href="signup.jsp">Sign up now</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
-	
-	
-	
+	<p class="text--center">
+		Not a member? <a href="signup.jsp">Sign up now</a>
+		<svg class="icon">
+		<use xmlns:xlink="http://www.w3.org/1999/xlink"
+			xlink:href="assets/images/icons.svg#arrow-right"></use></svg>
+	</p>
+
+
+
 </body>
 </html>

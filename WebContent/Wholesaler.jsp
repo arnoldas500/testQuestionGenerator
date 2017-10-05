@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<%@include file="nav.jsp" %>
+<%@include file="nav.jsp"%>
 </head>
 <body>
 	<h1>Wholesaler Information</h1>
@@ -16,14 +16,35 @@
 	<div style="color: #FF0000;">
 		Welcome, Wholesaler
 
-		<%= request.getSession().getAttribute("currentUser") %>
+		<%=request.getSession().getAttribute("currentUser")%>
 		! Current time is :
 		<%
-         Date date = new Date();
-         //out.print( "<h2 align = \"center\">" +date.toString()+"</h2>");
-         out.print( date.toString());
-      %>
-<%@include file="logout.jsp" %>
+		Date date = new Date();
+		//out.print( "<h2 align = \"center\">" +date.toString()+"</h2>");
+		out.print(date.toString());
+	%>
+
+	</div>
+	<div>
+		<h2>User info:</h2>
+		<table>
+			<tbody>
+				<tr>
+					<td>Username : <%=request.getSession().getAttribute("currentUser")%>
+						; Role : <%=request.getSession().getAttribute("roles")%>
+					</td>
+				</tr>
+				<tr>
+					<td>First Name : <%=request.getSession().getAttribute("firstName")%>
+						; Last Name : <%=request.getSession().getAttribute("lastName")%>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+
+		<%@include file="logout.jsp"%>
 	</div>
 </body>
 </html>

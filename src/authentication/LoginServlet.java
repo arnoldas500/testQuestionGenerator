@@ -1,6 +1,7 @@
 package authentication;
 
 //****REMOVED FROM WEB.XML
+
 /*
  * 
 <display-name>login</display-name>
@@ -30,8 +31,6 @@ package authentication;
  * 
  */
 
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -47,6 +46,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.AuthDAO;
 import model.User;
 
 /**
@@ -55,8 +55,8 @@ import model.User;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//getConnection();
-	
+	// getConnection();
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -64,33 +64,22 @@ public class LoginServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	/*
-	//used to connect to mysql databse
-	public static Connection getConnection() throws Exception{
-		//to catch any errors we might get
-		try {
-			String driver = "com.mysql.jdbc.Driver";
-			//where the databse is located
-			String url = "jdbc:mysql://localhost:3306/database";
-			String username = "arnold";
-			String password = "mypass";
-			Class.forName(driver);
-			
-			Connection connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connection established");
-			return connection;
 
-		} catch(Exception e) {
-			System.out.println(e);
-			}
-		
-		//will only hit this if connection not sucessful
-		return null;
-	}
-*/
-	
-	
+	/*
+	 * //used to connect to mysql databse public static Connection getConnection()
+	 * throws Exception{ //to catch any errors we might get try { String driver =
+	 * "com.mysql.jdbc.Driver"; //where the databse is located String url =
+	 * "jdbc:mysql://localhost:3306/database"; String username = "arnold"; String
+	 * password = "mypass"; Class.forName(driver);
+	 * 
+	 * Connection connection = DriverManager.getConnection(url, username, password);
+	 * System.out.println("Connection established"); return connection;
+	 * 
+	 * } catch(Exception e) { System.out.println(e); }
+	 * 
+	 * //will only hit this if connection not sucessful return null; }
+	 */
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -105,75 +94,58 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	
+
 	/*
-	try {
-		//fetching the data and storing in local variable 
-		String firstName = request.getParameter("firstName");
-		String lastname = request.getParameter("lastname");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String role = request.getParameter("role");
-		//creating sql queery from above data
-		//user is the actual sql table name and name and password is what it takes
-		String sql = "insert into User(username,password,role) values(?,?,?)";
-		String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
-		
-		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/csi518";
-		String usernameSQL = "root";
-		String passwordSQL = "";
-		Connection connection = DriverManager.getConnection(url,usernameSQL,passwordSQL);
-		
-		//execute sql command for users table
-		try(PreparedStatement ps = connection.prepareStatement(sql)){
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ps.setString(3, role);
-			//now need to execute this statement
-			ps.executeUpdate();
-		}
-		
-		//execute sql command for users profile table
-		try(PreparedStatement ps2 = connection.prepareStatement(sql2)){
-			ps2.setString(1, firstName);
-			ps2.setString(2, lastname);
-			//now need to execute this statement
-			ps2.executeUpdate();
-		}
-		
-		try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO PUBLISHER (CODE, PUBLISHER_NAME) VALUES (?, ?)")) {
-	        stmt.setString(1, book.getPublisher().getCode());   
-	        stmt.setString(2, book.getPublisher().getName());           
-	        stmt.executeUpdate();
-	    }
-	   
-		
-		
-		//print out what was executed
-		PrintWriter out = response.getWriter();
-		out.println("You have successfully signed up!");
-		//***DONT FORGET TO UPDATE WEB.XML under WEB-INF
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	*/
+	 * try { //fetching the data and storing in local variable String firstName =
+	 * request.getParameter("firstName"); String lastname =
+	 * request.getParameter("lastname"); String username =
+	 * request.getParameter("username"); String password =
+	 * request.getParameter("password"); String role = request.getParameter("role");
+	 * //creating sql queery from above data //user is the actual sql table name and
+	 * name and password is what it takes String sql =
+	 * "insert into User(username,password,role) values(?,?,?)"; String sql2 =
+	 * "insert into User_Profile(firstName,lastname) values(?,?)";
+	 * 
+	 * Class.forName("com.mysql.jdbc.Driver"); String url =
+	 * "jdbc:mysql://localhost:3306/csi518"; String usernameSQL = "root"; String
+	 * passwordSQL = ""; Connection connection =
+	 * DriverManager.getConnection(url,usernameSQL,passwordSQL);
+	 * 
+	 * //execute sql command for users table try(PreparedStatement ps =
+	 * connection.prepareStatement(sql)){ ps.setString(1, username); ps.setString(2,
+	 * password); ps.setString(3, role); //now need to execute this statement
+	 * ps.executeUpdate(); }
+	 * 
+	 * //execute sql command for users profile table try(PreparedStatement ps2 =
+	 * connection.prepareStatement(sql2)){ ps2.setString(1, firstName);
+	 * ps2.setString(2, lastname); //now need to execute this statement
+	 * ps2.executeUpdate(); }
+	 * 
+	 * try (PreparedStatement stmt = connection.
+	 * prepareStatement("INSERT INTO PUBLISHER (CODE, PUBLISHER_NAME) VALUES (?, ?)"
+	 * )) { stmt.setString(1, book.getPublisher().getCode()); stmt.setString(2,
+	 * book.getPublisher().getName()); stmt.executeUpdate(); }
+	 * 
+	 * 
+	 * 
+	 * //print out what was executed PrintWriter out = response.getWriter();
+	 * out.println("You have successfully signed up!"); //***DONT FORGET TO UPDATE
+	 * WEB.XML under WEB-INF } catch (ClassNotFoundException e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); } catch (SQLException e) { //
+	 * TODO Auto-generated catch block e.printStackTrace(); }
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
-			
+
 			/*
 			 * 
 			 * 
 			 */
-			
+
 			User jb2 = new User();
-			
+
 			// this is where control will go from the jsp login post method
 			// this is where i check if the username and password are valid or not
 			// doGet(request, response);
@@ -183,79 +155,99 @@ public class LoginServlet extends HttpServlet {
 			String usernameUpper = username.toUpperCase();
 			String password = request.getParameter("password");
 			String roles = request.getParameter("roles");
-			//String signUp = request.getParameter("signUp");
+			// String signUp = request.getParameter("signUp");
 			String dbName = null;
 			String dbPassword = null;
-			//String dbRole = null;
-			
-			//creating sql queery from above data to fetch the data from the mySQL database
-			//String sql = "select * from User where username=? and password=? and role=?";
+			// String dbRole = null;
+
+			// creating sql queery from above data to fetch the data from the mySQL database
+			// String sql = "select * from User where username=? and password=? and role=?";
 			String sql = "select * from User where username=? and password=?";
-			//String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
-			
+			// String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+
 			Class.forName("com.mysql.jdbc.Driver");
-			
+
 			String url = "jdbc:mysql://localhost:3306/csi518";
 			String usernameSQL = "root";
 			String passwordSQL = "";
-			Connection connection = DriverManager.getConnection(url,usernameSQL,passwordSQL);
-			
-			//execute sql command for users table
-			try(PreparedStatement ps = connection.prepareStatement(sql)){
+			Connection connection = DriverManager.getConnection(url, usernameSQL, passwordSQL);
+
+			// execute sql command for users table
+			try (PreparedStatement ps = connection.prepareStatement(sql)) {
 				ps.setString(1, username);
 				ps.setString(2, password);
-				//ps.setString("jb2", jb2);
-				//ps.setString(3, roles);
-				//fetch the data and store it somewhere 
+				int userId = 0;
+				// ps.setString("jb2", jb2);
+				// ps.setString(3, roles);
+				// fetch the data and store it somewhere
 				ResultSet resultSet = ps.executeQuery();
 				PrintWriter out = response.getWriter();
-				while(resultSet.next()) {
+				while (resultSet.next()) {
 					dbName = resultSet.getString("username");
 					dbPassword = resultSet.getString("password");
-					//dbRole = resultSet.getString("role");
+					// dbRole = resultSet.getString("role");
 				}
-				
+
 				jb2.setDbName(dbName);
-				
+
 				String test = jb2.getDbName();
 				PrintWriter out2 = response.getWriter();
-				out2.println("jbUSEr is **************  "+test);
-				
+				out2.println("jbUSEr is **************  " + test);
+
 				/*
-				//checking if information actually exist in the database
-				if(username.equals(dbName) && password.equals(dbPassword) && roles.equals(dbRole)) {
-					out.println("You have successfully signed in!");
-				}else {
-					//response.sendRedirect("login.jsp");
-					RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-					rd.include(request, response); //could also use forward instead of include
-				}
-				*/
-				
-				
-				//if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
+				 * //checking if information actually exist in the database
+				 * if(username.equals(dbName) && password.equals(dbPassword) &&
+				 * roles.equals(dbRole)) { out.println("You have successfully signed in!");
+				 * }else { //response.sendRedirect("login.jsp"); RequestDispatcher rd =
+				 * request.getRequestDispatcher("login.jsp"); rd.include(request, response);
+				 * //could also use forward instead of include }
+				 */
+
+				// if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
 				if (username.equals(dbName) && password.equals(dbPassword)) {
 					// if login is successfull then redirect to members jsp page
 					// request.getSession().removeAttribute("errorMessage");
 					// response.sendRedirect("members.jsp");
+
+					userId = AuthDAO.getUserId();
+					userId -= 1;
+					jb2.setUserId(userId);
+					System.out.println("Current user ID is : " + userId);
+					User m = new User();
+					m = AuthDAO.getUserById(userId);
+					System.out.print("testing get user by id for Firstname : " + m.getFirstname());
+					System.out.print("testing get user by id for Firstname : " + m.getLastname());
+
 					if (roles.equals("Supplier")) {
 						request.getSession().setAttribute("currentUser", username);
+						request.getSession().setAttribute("roles", roles);
+						request.getSession().setAttribute("firstName", m.getFirstname());
+						request.getSession().setAttribute("lastName", m.getLastname());
 						request.getRequestDispatcher("Supplier.jsp").forward(request, response);
 						// request.setAttribute("currentDate", "Please enter username.");
 					}
 
 					if (roles.equals("Wholesaler")) {
 						request.getSession().setAttribute("currentUser", username);
+						request.getSession().setAttribute("roles", roles);
+						request.getSession().setAttribute("firstName", m.getFirstname());
+						request.getSession().setAttribute("lastName", m.getLastname());
 						request.getRequestDispatcher("Wholesaler.jsp").forward(request, response);
 					}
-					
+
 					if (roles.equals("Retailer")) {
 						request.getSession().setAttribute("currentUser", username);
+						request.getSession().setAttribute("roles", roles);
+						request.getSession().setAttribute("firstName", m.getFirstname());
+						request.getSession().setAttribute("lastName", m.getLastname());
 						request.getRequestDispatcher("Retailer.jsp").forward(request, response);
 					}
-					
+
 					if (roles.equals("Customer")) {
 						request.getSession().setAttribute("currentUser", username);
+						request.getSession().setAttribute("roles", roles);
+						request.getSession().setAttribute("firstName", m.getFirstname());
+						request.getSession().setAttribute("lastName", m.getLastname());
 						request.getRequestDispatcher("Customer.jsp").forward(request, response);
 					}
 
@@ -264,40 +256,38 @@ public class LoginServlet extends HttpServlet {
 					// if not succesfull redirect to error.jsp
 					// response.sendRedirect("error.jsp");
 					// request.getSession().removeAttribute("errorMessage");
-					
-					//if (usernameUpper.isEmpty() && password.isEmpty()) {
+
+					// if (usernameUpper.isEmpty() && password.isEmpty()) {
 					if (username.isEmpty() && password.isEmpty()) {
 						request.setAttribute("errorMessage", "Please enter username and password.");
 					}
-					//else if (usernameUpper.isEmpty()) {
-					 else if (username.isEmpty()) {
+					// else if (usernameUpper.isEmpty()) {
+					else if (username.isEmpty()) {
 						request.setAttribute("errorMessage", "Please enter username.");
 					} else if (password.isEmpty()) {
 						request.setAttribute("errorMessage", "Please enter password.");
 					} else {
 						request.setAttribute("errorMessage", "Your information does not exist!");
 					}
-					
+
 					/*
-					***TESTING to see if random input and some field left blank***
-					{ // if the username or password incorrect will go here
-					// if not succesfull redirect to error.jsp
-					// response.sendRedirect("error.jsp");
-					// request.getSession().removeAttribute("errorMessage");
-					if (usernameUpper.equals("ICSI518") && password.isEmpty()) {
-						request.setAttribute("errorMessage", "Please enter password.");
-					} else if (usernameUpper.isEmpty() && password.equals("Fall2017")) {
-						request.setAttribute("errorMessage", "Please enter username.");
-					} else if (usernameUpper.isEmpty() && password.isEmpty()) {
-						request.setAttribute("errorMessage", "Please enter username and password.");
-					} else {
-						request.setAttribute("errorMessage", "Invalid username and password.");
-					}
-					
-					
-					
-					*/
-					
+					 *** TESTING to see if random input and some field left blank*** { // if the
+					 * username or password incorrect will go here // if not succesfull redirect to
+					 * error.jsp // response.sendRedirect("error.jsp"); //
+					 * request.getSession().removeAttribute("errorMessage"); if
+					 * (usernameUpper.equals("ICSI518") && password.isEmpty()) {
+					 * request.setAttribute("errorMessage", "Please enter password."); } else if
+					 * (usernameUpper.isEmpty() && password.equals("Fall2017")) {
+					 * request.setAttribute("errorMessage", "Please enter username."); } else if
+					 * (usernameUpper.isEmpty() && password.isEmpty()) {
+					 * request.setAttribute("errorMessage", "Please enter username and password.");
+					 * } else { request.setAttribute("errorMessage",
+					 * "Invalid username and password."); }
+					 * 
+					 * 
+					 * 
+					 */
+
 					/*
 					 * if(!(username.equals("ICSI518")) && !(password.equals("Fall2017"))) {
 					 * request.getSession().setAttribute("errorMessage",
@@ -305,11 +295,11 @@ public class LoginServlet extends HttpServlet {
 					 */
 					// request.getSession().setAttribute("errorMessage", "Please enter username and
 					// password");
-					request.getRequestDispatcher("Login.jsp").forward(request, response); //could also use include 
+					request.getRequestDispatcher("Login.jsp").forward(request, response); // could also use include
 				}
-				
+
 			}
-			
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -317,7 +307,6 @@ public class LoginServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 
