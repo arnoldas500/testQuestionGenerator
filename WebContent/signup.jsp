@@ -9,6 +9,14 @@
 
 </head>
 <body>
+<style>
+*{
+background-color: grey;
+
+}
+
+</style>
+
 <%@include file="nav.jsp" %>
 <%
 /*/For initial testing connection to database

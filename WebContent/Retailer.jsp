@@ -10,6 +10,13 @@
 </head>
 <body>
 <body>
+<style>
+*{
+background-color: grey;
+
+}
+
+</style>
 	<h1>Retailer Information</h1>
 	Hello, you logged in successfully
 	<center></center>

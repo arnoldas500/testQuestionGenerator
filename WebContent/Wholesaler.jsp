@@ -10,6 +10,13 @@
 <%@include file="nav.jsp"%>
 </head>
 <body>
+<style>
+*{
+background-color: grey;
+
+}
+
+</style>
 	<h1>Wholesaler Information</h1>
 	Hello, you logged in successfully
 	<center></center>

@@ -9,7 +9,15 @@
 <%@include file="nav.jsp"%>
 </head>
 <body>
-<body>
+
+<style>
+*{
+background-color: grey;
+
+}
+
+</style>
+
 	<h1>Customer Information</h1>
 	Hello, you logged in successfully
 	<center></center>

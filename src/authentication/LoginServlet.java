@@ -158,11 +158,11 @@ public class LoginServlet extends HttpServlet {
 			// String signUp = request.getParameter("signUp");
 			String dbName = null;
 			String dbPassword = null;
-			// String dbRole = null;
+			String dbRole = null;
 
 			// creating sql queery from above data to fetch the data from the mySQL database
 			// String sql = "select * from User where username=? and password=? and role=?";
-			String sql = "select * from User where username=? and password=?";
+			String sql = "select * from User where username=? and password=? and role=?";
 			// String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
 
 			Class.forName("com.mysql.jdbc.Driver");
@@ -176,6 +176,7 @@ public class LoginServlet extends HttpServlet {
 			try (PreparedStatement ps = connection.prepareStatement(sql)) {
 				ps.setString(1, username);
 				ps.setString(2, password);
+				ps.setString(3, roles);
 				int userId = 0;
 				// ps.setString("jb2", jb2);
 				// ps.setString(3, roles);
@@ -185,10 +186,11 @@ public class LoginServlet extends HttpServlet {
 				while (resultSet.next()) {
 					dbName = resultSet.getString("username");
 					dbPassword = resultSet.getString("password");
-					// dbRole = resultSet.getString("role");
+					dbRole = resultSet.getString("role");
 				}
 
 				jb2.setDbName(dbName);
+				jb2.setRole(dbRole);
 
 				String test = jb2.getDbName();
 				PrintWriter out2 = response.getWriter();
@@ -204,7 +206,7 @@ public class LoginServlet extends HttpServlet {
 				 */
 
 				// if (usernameUpper.equals(dbName) && password.equals(dbPassword)) {
-				if (username.equals(dbName) && password.equals(dbPassword)) {
+				if (username.equals(dbName) && password.equals(dbPassword) && roles.equals(dbRole)) {
 					// if login is successfull then redirect to members jsp page
 					// request.getSession().removeAttribute("errorMessage");
 					// response.sendRedirect("members.jsp");
