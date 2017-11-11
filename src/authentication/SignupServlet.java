@@ -119,21 +119,21 @@ public class SignupServlet extends HttpServlet {
 //				System.out.print("testing get user by id for Firstname : " + b.getFirstname());
 //				System.out.print("testing get user by id for Firstname : " + b.getLastname());
 
-				if (roles.equals("Supplier")) {
+				if (roles.equals("Student")) {
 					request.getSession().setAttribute("currentUser", username);
 					request.getSession().setAttribute("roles", roles);
 					request.getSession().setAttribute("firstName", firstName);
 					request.getSession().setAttribute("lastName", lastname);
-					request.getRequestDispatcher("Supplier.jsp").forward(request, response);
+					request.getRequestDispatcher("Student.jsp").forward(request, response);
 					// request.setAttribute("currentDate", "Please enter username.");
 				}
 
-				if (roles.equals("Wholesaler")) {
+				if (roles.equals("Instructor")) {
 					request.getSession().setAttribute("currentUser", username);
 					request.getSession().setAttribute("roles", roles);
 					request.getSession().setAttribute("firstName", firstName);
 					request.getSession().setAttribute("lastName", lastname);
-					request.getRequestDispatcher("Wholesaler.jsp").forward(request, response);
+					request.getRequestDispatcher("Instructor.jsp").forward(request, response);
 				}
 
 				if (roles.equals("Retailer")) {
@@ -144,12 +144,12 @@ public class SignupServlet extends HttpServlet {
 					request.getRequestDispatcher("Retailer.jsp").forward(request, response);
 				}
 
-				if (roles.equals("Customer")) {
+				if (roles.equals("TA")) {
 					request.getSession().setAttribute("currentUser", username);
 					request.getSession().setAttribute("roles", roles);
 					request.getSession().setAttribute("firstName", firstName);
 					request.getSession().setAttribute("lastName", lastname);
-					request.getRequestDispatcher("Customer.jsp").forward(request, response);
+					request.getRequestDispatcher("TA.jsp").forward(request, response);
 				}
 			}
 

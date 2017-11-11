@@ -103,6 +103,9 @@ public class AuthDAO {
 		return j;
 	}
 
+	
+	
+	
 	// method to get user id
 	public static int getUserId() {
 
@@ -130,6 +133,8 @@ public class AuthDAO {
 
 		return ID;
 	}
+	
+	
 
 	public static User getUserById(int userId) {
 		User m = new User();

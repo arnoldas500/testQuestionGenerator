@@ -89,10 +89,10 @@ Role : <input type="text" name="role" required="required">
 				<tr>
 					<td>Roles : </td>
 					<td><select name="role" required="required">
-							<option value="Supplier">Supplier</option>
-							<option value="Wholesaler">Wholesaler</option>
-							<option value="Retailer">Retailer</option>
-							<option value="Customer">Customer</option>
+							<option value="Student">I am a Student</option>
+							<option value="Instructor">I am an Instructor</option>
+							
+							<option value="TA">I am a TA</option>
 
 					</select></td>
 				</tr>

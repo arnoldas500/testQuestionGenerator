@@ -16,11 +16,11 @@ background-color: grey;
 }
 
 </style>
-	<h1>Supplier Information</h1>
+	<h1>Student Information</h1>
 	Hello, you logged in successfully
 	<center></center>
 	<div style="color: #FF0000;">
-		Welcome, Supplier
+		Welcome, Student
 
 		<%=request.getSession().getAttribute("currentUser")%>
 		! Current time is :

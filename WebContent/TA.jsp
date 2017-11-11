@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +9,7 @@
 <%@include file="nav.jsp"%>
 </head>
 <body>
+
 <style>
 *{
 background-color: grey;
@@ -17,11 +17,12 @@ background-color: grey;
 }
 
 </style>
-	<h1>Wholesaler Information</h1>
+
+	<h1>TA Information</h1>
 	Hello, you logged in successfully
 	<center></center>
 	<div style="color: #FF0000;">
-		Welcome, Wholesaler
+		Welcome, TA
 
 		<%=request.getSession().getAttribute("currentUser")%>
 		! Current time is :
@@ -49,7 +50,8 @@ background-color: grey;
 
 			</tbody>
 		</table>
-
+		<a href="CreateQuestion.jsp">Create Questions</a>
+		<a href="AnswerQuestion.jsp">Answer Questions</a>
 
 		<%@include file="logout.jsp"%>
 	</div>
