@@ -81,9 +81,10 @@ public class MCQuestionsServlet extends HttpServlet {
 
 				if (i != 0) {
 					System.out.println("Values inserted successfully into MCQuestions table!");
+					request.getRequestDispatcher("MCQuestion.jsp").forward(request, response);
 
 				} else {
-					System.out.println("Error! Values not inserted into User table!");
+					System.out.println("Error! Values not inserted into MCQuestions table!");
 				}
 
 		

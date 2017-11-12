@@ -9,7 +9,7 @@
 <body>
 <h2 align="center" style="color: #FF0000;">Please create multiple choice question:</h2>
 <div align="center">
-<form name="MuQuestions" method="post" action="MuQuestionsServlet">
+<form name="MuQuestions" method="post" action="NuQuestionsServlet">
 		<table>
 			<tbody>
 			
@@ -29,14 +29,7 @@
 				
 				<tr>
 					<td>Answer : </td>
-					<td><select name="answer" required="required">
-							<option value="a">A</option>
-							<option value="b">B</option>
-							
-							<option value="c">C</option>
-							<option value="d">D</option>
-
-					</select></td>
+					<td><input type="text" name="answer"></td>
 				</tr>
 				<tr>
 					<td>Hint 1 : </td>

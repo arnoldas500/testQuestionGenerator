@@ -77,12 +77,11 @@ public class AuthDAO {
 			try (PreparedStatement ps = connection.prepareStatement(sql)) {
 				// setting the values
 				ps.setString(1, nuq.getQuestion());
-
-				ps.setString(6, nuq.getAnswer());
-				ps.setString(7, nuq.getHint1());
-				ps.setString(8, nuq.getHint2());
-				ps.setString(9, nuq.getHint3());
-				ps.setString(10, nuq.getFeedback());
+				ps.setString(2, nuq.getAnswer());
+				ps.setString(3, nuq.getHint1());
+				ps.setString(4, nuq.getHint2());
+				ps.setString(5, nuq.getHint3());
+				ps.setString(6, nuq.getFeedback());
 				// now need to execute this statement
 				i = ps.executeUpdate();
 			} catch (SQLException e) {

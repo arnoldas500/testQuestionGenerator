@@ -68,14 +68,15 @@ public class NuQuestionsServlet extends HttpServlet {
 				
 				
 				// calling a method in DAO class to insert data into table
-				String sql = "insert into MCQuestions(questions,answer,hint1,hint2,hint3,feedback) values(?,?,?,?,?,?)";
+				String sql = "insert into NuQuestions(question,answer,hint1,hint2,hint3,feedback) values(?,?,?,?,?,?)";
 				int i = AuthDAO.enterNewNuQuestion(nuq, sql);
 
 				if (i != 0) {
-					System.out.println("Values inserted successfully into MCQuestions table!");
+					System.out.println("Values inserted successfully into NuQuestions table!");
+					request.getRequestDispatcher("NuQuestion.jsp").forward(request, response);
 
 				} else {
-					System.out.println("Error! Values not inserted into User table!");
+					System.out.println("Error! Values not inserted into NuQuestions table!");
 				}
 
 
