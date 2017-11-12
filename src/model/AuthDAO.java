@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//import authentication.MCQuestions;
+
 public class AuthDAO {
 
 	// method to create connection to database
@@ -64,6 +66,60 @@ public class AuthDAO {
 		}
 
 		return k;
+	}
+	//enterNewNuQuestion
+	// method to insert new info into nuquesions into database
+		public static int enterNewNuQuestion(NuQuestions nuq, String sql) {
+			//String sql = "insert into MCQuestions(questions,answer,hint1,hint2,hint3,feedback) values(?,?,?,?,?,?,?)";
+
+			int i = 0;
+			Connection connection = connect();
+			try (PreparedStatement ps = connection.prepareStatement(sql)) {
+				// setting the values
+				ps.setString(1, nuq.getQuestion());
+
+				ps.setString(6, nuq.getAnswer());
+				ps.setString(7, nuq.getHint1());
+				ps.setString(8, nuq.getHint2());
+				ps.setString(9, nuq.getHint3());
+				ps.setString(10, nuq.getFeedback());
+				// now need to execute this statement
+				i = ps.executeUpdate();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+
+			return i;
+		}
+	
+	
+	// method to insert new info into mcquesions into database
+	public static int enterNewMCQuestion(MCQuestions mcq, String sql) {
+		//String sql = "insert into MCQuestions(questions,choiceA,choiceB,choiceB,choiceC,choiceD,answer,hint1,hint2,hint3,feedback) values(?,?,?,?,?,?,?,?,?,?,?)";
+
+		int i = 0;
+		Connection connection = connect();
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+			// setting the values
+			ps.setString(1, mcq.getQuestions());
+			ps.setString(2, mcq.getChoiceA());
+			ps.setString(3, mcq.getChoiceB());
+			ps.setString(4, mcq.getChoiceC());
+			ps.setString(5, mcq.getChoiceD());
+			ps.setString(6, mcq.getAnswer());
+			ps.setString(7, mcq.getHint1());
+			ps.setString(8, mcq.getHint2());
+			ps.setString(9, mcq.getHint3());
+			ps.setString(10, mcq.getFeedback());
+			// now need to execute this statement
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return i;
 	}
 
 	// method to insert new users into database

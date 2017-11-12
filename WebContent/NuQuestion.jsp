@@ -9,7 +9,7 @@
 <body>
 <h2 align="center" style="color: #FF0000;">Please create multiple choice question:</h2>
 <div align="center">
-<form name="MCQuestions" method="post" action="MCQuestionsServlet">
+<form name="MuQuestions" method="post" action="MuQuestionsServlet">
 		<table>
 			<tbody>
 			
@@ -26,23 +26,6 @@
 					<td>Questions : </td>
 					<td><input type="text" name="questions"></td>
 				</tr>
-				<tr>
-					<td>Choice A : </td>
-					<td><input type="text" name="choiceA" ></td>
-				</tr>
-				<tr>
-					<td>Choice B : </td>
-					<td><input type="text" name="choiceB" ></td>
-				</tr>
-				<tr>
-					<td>Choice C : </td>
-					<td><input type="text" name="choiceC" ></td>
-				</tr>
-				<tr>
-					<td>Choice D : </td>
-					<td><input type="text" name="choiceD" ></td>
-				</tr>
-				
 				
 				<tr>
 					<td>Answer : </td>
