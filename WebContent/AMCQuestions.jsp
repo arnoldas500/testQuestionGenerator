@@ -34,10 +34,10 @@
 			 -->
 			 <td>Username : <%=request.getSession().getAttribute("questions")%>
 						; Role : <%=request.getSession().getAttribute("roles")%>
-						
+						<%=request.getAttribute("questions")%>
 					</td>
 			 	<tr>
-					<td>Questions : <%=request.getAttribute("questions")%></td>
+					<td>Questions : <%=request.getSession().getAttribute("questions")%></td>
 					<td><input type="text" name="questions"></td>
 				</tr>
 				<tr>
@@ -70,7 +70,7 @@
 					</select></td>
 				</tr>
 				<tr>
-					<td>Hint 1 : <%=request.getAttribute("hint1")%></td>
+					<td>Hint 1 : <%=request.getSession().getAttribute("hint1")%></td>
 					<td><input type="text" name="hint1" ></td>
 				</tr>
 				

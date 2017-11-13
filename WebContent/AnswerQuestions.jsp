@@ -8,8 +8,13 @@
 </head>
 <body>
 <h1>Please choose questions to answer</h1>
-
-<a href="AMCQuestion.jsp">Multiple-Choice Questions</a>
+<form name="MCQuestions" method="post" action="AMCQuestionsServlet"> 
+<input type="submit" value="Multiple-Choice Questions"> 
+<input type="submit" value="Numeric Questions"> 
+<!-- 
+<a href="AMCQuestions.jsp">Multiple-Choice Questions</a>
 <a href="ANuQuestion.jsp">Numeric Questions</a>
+ -->
+</form>
 </body>
 </html>

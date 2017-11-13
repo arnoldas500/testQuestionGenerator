@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +39,12 @@ public class AMCQuestionsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Here Do get");
+		request.setAttribute("hint1", "hello");
+		request.getSession().setAttribute("questions", "hello");
+	    RequestDispatcher view=request.getRequestDispatcher("/AMCQuestions.jsp");
+	    view.forward(request,response);
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -80,8 +87,9 @@ public class AMCQuestionsServlet extends HttpServlet {
 
 			// creating sql queery from above data to fetch the data from the mySQL database
 			// String sql = "select * from User where username=? and password=? and role=?";
-			String sql = "select * from MCQestions where questions=? and choiceA=? and choiceB=? and choiceC=? and choiceD=? and answer=? and hint1=? and hint2=? and hint3=? and feedback=?";
+			//String sql = "select * from MCQestions where questions=? and choiceA=? and choiceB=? and choiceC=? and choiceD=? and answer=? and hint1=? and hint2=? and hint3=? and feedback=?";
 			// String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
+			String sql = "select * from MCQuestions where mcq_id=" + 1;
 
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -96,7 +104,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 //				ps.setString(1, questions);
 //				ps.setString(2, choiceA);
 //				ps.setString(3, roles);
-				int mcq_id = 0;
+				int mcq_id = 1;
 				// ps.setString("jb2", jb2);
 				// ps.setString(3, roles);
 				// fetch the data and store it somewhere
@@ -138,21 +146,21 @@ public class AMCQuestionsServlet extends HttpServlet {
 				//m = AuthDAO.getUserById(userId);
 				
 				
-				MCQuestions mcq = new MCQuestions();
-				mcq = AuthDAO.getMCQById(mcq_id);
-				System.out.print("testing get mcquestion by id for question : " + mcq.getQuestions());
+				//MCQuestions mcq = new MCQuestions();
+				//amcq = AuthDAO.getMCQById(mcq_id);
+				System.out.print("testing get mcquestion by id for question : " + amcq.getQuestions());
 
-				//request.getSession().setAttribute("questions", mcq.getQuestions());
-				request.getSession().setAttribute("choiceA", mcq.getChoiceA());
-				request.getSession().setAttribute("choiceB", mcq.getChoiceB());
-				request.getSession().setAttribute("choiceC", mcq.getChoiceC());
-				request.getSession().setAttribute("choiceD", mcq.getChoiceD());
-				request.getSession().setAttribute("answer", mcq.getAnswer());
-				request.getSession().setAttribute("hint1", mcq.getHint1());
-				request.getSession().setAttribute("hint2", mcq.getHint2());
-				request.getSession().setAttribute("hint3", mcq.getHint3());
-				request.getSession().setAttribute("feedback", mcq.getFeedback());
-				request.setAttribute("questions", mcq.getQuestions());
+				request.getSession().setAttribute("questions", amcq.getQuestions());
+				request.getSession().setAttribute("choiceA", amcq.getChoiceA());
+				request.getSession().setAttribute("choiceB", amcq.getChoiceB());
+				request.getSession().setAttribute("choiceC", amcq.getChoiceC());
+				request.getSession().setAttribute("choiceD", amcq.getChoiceD());
+				request.getSession().setAttribute("answer", amcq.getAnswer());
+				request.getSession().setAttribute("hint1", amcq.getHint1());
+				request.getSession().setAttribute("hint2", amcq.getHint2());
+				request.getSession().setAttribute("hint3", amcq.getHint3());
+				request.getSession().setAttribute("feedback", amcq.getFeedback());
+				request.setAttribute("questions", amcq.getQuestions());
 				
 				request.getRequestDispatcher("/AMCQuestion.jsp").forward(request, response);
 				
@@ -206,7 +214,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 		}
 		
 		
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
