@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>Please choose questions to answer</h1>
 
+<a href="AMCQuestion.jsp">Multiple-Choice Questions</a>
+<a href="ANuQuestion.jsp">Numeric Questions</a>
 </body>
 </html>

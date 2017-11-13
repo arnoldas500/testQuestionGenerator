@@ -158,6 +158,61 @@ public class AuthDAO {
 		return j;
 	}
 
+	// method to get NuQuestions nuq_id
+			public static int getNuQ_id() {
+
+				int ID = -1;
+				try (Connection connection = connect()) {
+					String sql = "SELECT nuq_id FROM NuQuestions ORDER BY nuq_id DESC LIMIT 1";
+					Statement st = connection.createStatement();
+					ResultSet rs = st.executeQuery(sql);
+
+					if (rs.next()) {
+						ID = rs.getInt("nuq_id");
+						ID += 1;
+					} else { // if table is empty then start the id from 1
+						ID = 1;
+					}
+
+					rs.close();
+					st.close();
+
+				} catch (SQLException e) {
+					// sendErrorRedirect(request, response, "/signup.jsp", e);
+					// request.setAttribute("errorMessage", "Username existed");
+					e.printStackTrace();
+				}
+
+				return ID;
+			}
+	
+	// method to get MCQuestions mcq_id
+		public static int getMCQ_id() {
+
+			int ID = -1;
+			try (Connection connection = connect()) {
+				String sql = "SELECT mcq_id FROM MCQuestions ORDER BY mcq_id DESC LIMIT 1";
+				Statement st = connection.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+
+				if (rs.next()) {
+					ID = rs.getInt("mcq_id");
+					ID += 1;
+				} else { // if table is empty then start the id from 1
+					ID = 1;
+				}
+
+				rs.close();
+				st.close();
+
+			} catch (SQLException e) {
+				// sendErrorRedirect(request, response, "/signup.jsp", e);
+				// request.setAttribute("errorMessage", "Username existed");
+				e.printStackTrace();
+			}
+
+			return ID;
+		}
 	
 	
 	
@@ -189,7 +244,77 @@ public class AuthDAO {
 		return ID;
 	}
 	
+	public static NuQuestions getNuQById(int nuq_id) {
+		NuQuestions nuq = new NuQuestions();
+		try (Connection connection = connect()) {
+			String sql = "SELECT * FROM User_Profile WHERE userId=" + nuq_id;
+			Statement st = connection.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+				nuq.setNuq_id(nuq_id);
+				// m.setFirstname("firstname");
+				nuq.setQuestion(rs.getString("questions"));
+				
+				nuq.setAnswer(rs.getString("answer"));
+				nuq.setHint1(rs.getString("hint1"));
+				nuq.setHint2(rs.getString("hint2"));
+				nuq.setHint3(rs.getString("hint3"));
+				nuq.setFeedback(rs.getString("feedback"));
+
+			}
+
+			System.out.print("Checking if got answers : " + nuq.getAnswer());
+			System.out.print("Checking if got feedback : " + nuq.getFeedback());
+			rs.close();
+			st.close();
+
+		} catch (SQLException e) {
+			// sendErrorRedirect(request, response, "/signup.jsp", e);
+			// request.setAttribute("errorMessage", "Username existed");
+			e.printStackTrace();
+		}
+
+		return nuq;
+	}
+
 	
+	public static MCQuestions getMCQById(int mcq_id) {
+		MCQuestions mcq = new MCQuestions();
+		try (Connection connection = connect()) {
+			String sql = "SELECT * FROM User_Profile WHERE userId=" + mcq_id;
+			Statement st = connection.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+				mcq.setMcq_id(mcq_id);
+				// m.setFirstname("firstname");
+				mcq.setQuestions(rs.getString("questions"));
+				mcq.setChoiceA(rs.getString("choiceA"));
+				mcq.setChoiceB(rs.getString("choiceB"));
+				mcq.setChoiceC(rs.getString("choiceC"));
+				mcq.setChoiceD(rs.getString("choiceD"));
+				mcq.setAnswer(rs.getString("answer"));
+				mcq.setHint1(rs.getString("hint1"));
+				mcq.setHint2(rs.getString("hint2"));
+				mcq.setHint3(rs.getString("hint3"));
+				mcq.setFeedback(rs.getString("feedback"));
+
+			}
+
+			System.out.print("Checking if got answers : " + mcq.getAnswer());
+			System.out.print("Checking if got feedback : " + mcq.getFeedback());
+			rs.close();
+			st.close();
+
+		} catch (SQLException e) {
+			// sendErrorRedirect(request, response, "/signup.jsp", e);
+			// request.setAttribute("errorMessage", "Username existed");
+			e.printStackTrace();
+		}
+
+		return mcq;
+	}
 
 	public static User getUserById(int userId) {
 		User m = new User();
