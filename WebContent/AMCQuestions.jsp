@@ -13,8 +13,7 @@
 					</td>
 					<div style="color: #FF0000;">${choiceA}</div>
  -->
- <h1 align="center" ><%=request.getSession().getAttribute("flag")%></h1>
-<h2 align="center" style="color: #FF0000;">Please answer multiple choice question:</h2>
+ 
 <div align="center">
  <form name="MCQuestions" method="post" action="AMCQuestionsServlet">  
 		<table>
@@ -38,6 +37,8 @@
 					<td>Num : <%=request.getAttribute("qNum")%></td>
 					<td><input type="text" name="qNum"></td>
 				</tr> --%>
+				<h1 align="center" ><%=request.getSession().getAttribute("flag")%></h1>
+<h2 align="center" style="color: #FF0000;">Please answer multiple choice question:</h2>
 			 
 			 	<tr>
 					<td>Question <%=request.getSession().getAttribute("qNum")%>: <%=request.getSession().getAttribute("questions")%></td>

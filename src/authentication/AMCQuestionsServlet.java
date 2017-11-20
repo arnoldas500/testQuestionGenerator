@@ -62,16 +62,17 @@ public class AMCQuestionsServlet extends HttpServlet {
 		String next = request.getParameter("next");
 		//int qNum = request.getParameter("qNum");
 		int num = 1;
-		int userId = 0;
+		int mcq_id1 = 0;
 		//qNum is the question number
 //		qNum++;
 //		System.out.println("\nqNum "+qNum);
 		try {
 			
-			userId = AuthDAO.getMCQ_id();
+			mcq_id1 = AuthDAO.getMCQ_id();
 			//userId -= 1;
 			//m.setUserId(userId);
-			System.out.println("Current user ID is : " + userId);
+			mcq_id1--;
+			System.out.println("Current mcq_id is : " + mcq_id1);
 			
 			System.out.println("inside try ");
 			System.out.println("user chosen answer "+ answerUser);
@@ -119,6 +120,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 			String hint2 = null;
 			String hint3 = null;
 			String feedback = null;
+			Boolean correct = true;
 			//int mcq_id = (Integer) null;
 
 			// creating sql queery from above data to fetch the data from the mySQL database
@@ -194,28 +196,41 @@ public class AMCQuestionsServlet extends HttpServlet {
 				request.getSession().setAttribute("choiceC", amcq.getChoiceC());
 				request.getSession().setAttribute("choiceD", amcq.getChoiceD());
 				//request.getSession().setAttribute("answer", amcq.getAnswer());
-				if(attempt < 1) {
+				System.out.print("\nDBanswer is : "+amcq.getAnswer());
+				System.out.print("\nUser selectd answer is : "+answerUser);
+				
+				if (answerUser.equals(amcq.getAnswer())) {
+					request.getSession().setAttribute("flag", "Correct!");
+					correct = false;
+				}
+				
+				
+				if(attempt < 1 && correct) {
 					request.getSession().setAttribute("hint1", "");
 					request.getSession().setAttribute("hint2", "");
 					request.getSession().setAttribute("hint3", "");
 					request.getSession().setAttribute("message", "");
 					request.getSession().setAttribute("feedback", "");
+					request.getSession().setAttribute("flag", "");
 					
 				}
-				if (attempt >=1) {
+				if (attempt >=1 && correct) {
 					request.getSession().setAttribute("hint1", amcq.getHint1());
+					request.getSession().setAttribute("flag", "Incorrect!");
 				}else {
 					request.getSession().setAttribute("hint1", "");
 				}
-				if (attempt >=2) {
+				if (attempt >=2 && correct) {
 					request.getSession().setAttribute("hint2", amcq.getHint2());
+					request.getSession().setAttribute("flag", "Incorrect!");
 				}else {
 					request.getSession().setAttribute("hint2", "");
 				}
-				if (attempt >=3) {
+				if (attempt >=3 && correct) {
 					request.getSession().setAttribute("hint3", amcq.getHint3());
 					request.getSession().setAttribute("message", amcq.getAnswer());
 					request.getSession().setAttribute("feedback", amcq.getFeedback());
+					request.getSession().setAttribute("flag", "Incorrect!");
 				}else {
 					request.getSession().setAttribute("hint3", "");
 					request.getSession().setAttribute("message", "");
@@ -223,6 +238,21 @@ public class AMCQuestionsServlet extends HttpServlet {
 				}
 				
 				request.getSession().setAttribute("qNum", qNum);
+				
+				System.out.print("\nqNum is : "+qNum);
+				System.out.print("\nMCQ ID1 is : "+mcq_id1);
+				if (mcq_id1 == qNum) {
+					request.getSession().setAttribute("flag", "This is the last question!");
+				}else if (qNum > mcq_id1) {
+					request.getSession().setAttribute("flag", "There is no more questions!");
+					request.getSession().setAttribute("message", "There is no more questions!");
+					request.getSession().setAttribute("hint1", "");
+					request.getSession().setAttribute("hint2", "");
+					request.getSession().setAttribute("hint3", "");
+					//request.getSession().setAttribute("message", "");
+					request.getSession().setAttribute("feedback", "");
+				}
+				
 				//tryng to set question number
 				num+=1;
 				

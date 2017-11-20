@@ -50,6 +50,7 @@ public class AnswerQuestions extends HttpServlet {
 
 		if ("AMCQuestionsServlet".equals(action)) {
 			request.getRequestDispatcher("/AMCQuestions.jsp").forward(request, response);
+			//qNum = 0;
 			//int i = 0;
 			//i+=1;
 			//System.out.println("testing i is :"+i);
