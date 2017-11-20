@@ -27,7 +27,8 @@ import model.User;
 public class AMCQuestionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//global var for counter
-	//public int qcounter = 0;
+	public int qNum = 0;
+	public int attempt = 0;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -62,8 +63,9 @@ public class AMCQuestionsServlet extends HttpServlet {
 		//int qNum = request.getParameter("qNum");
 		int num = 1;
 		int userId = 0;
-		//qcounter++;
-		//System.out.println("qcounter "+qcounter);
+		//qNum is the question number
+//		qNum++;
+//		System.out.println("\nqNum "+qNum);
 		try {
 			
 			userId = AuthDAO.getMCQ_id();
@@ -74,10 +76,18 @@ public class AMCQuestionsServlet extends HttpServlet {
 			System.out.println("inside try ");
 			System.out.println("user chosen answer "+ answerUser);
 			if(next != null) {
-				num +=1;
-				System.out.println("next Q, number "+ num);
+				qNum++;
+				System.out.println("\n qNum "+qNum);
+				//reset attempt counter
+				attempt=0;
 			}
-			System.out.println("question number "+ num);
+			
+			if(submit != null) {
+				attempt++;
+				System.out.println("\n attempt "+attempt);
+				//use cases here
+			}
+			//System.out.println("question number "+ num);
 			System.out.println("butten pressed "+ submit);
 			System.out.println("butten pressed "+ next);
 			
@@ -115,7 +125,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 			// String sql = "select * from User where username=? and password=? and role=?";
 			//String sql = "select * from MCQestions where questions=? and choiceA=? and choiceB=? and choiceC=? and choiceD=? and answer=? and hint1=? and hint2=? and hint3=? and feedback=?";
 			// String sql2 = "insert into User_Profile(firstName,lastname) values(?,?)";
-			String sql = "select * from MCQuestions where mcq_id=" + 1;
+			String sql = "select * from MCQuestions where mcq_id=" + qNum;
 
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -183,14 +193,39 @@ public class AMCQuestionsServlet extends HttpServlet {
 				request.getSession().setAttribute("choiceB", amcq.getChoiceB());
 				request.getSession().setAttribute("choiceC", amcq.getChoiceC());
 				request.getSession().setAttribute("choiceD", amcq.getChoiceD());
-				request.getSession().setAttribute("answer", amcq.getAnswer());
-				request.getSession().setAttribute("hint1", amcq.getHint1());
-				request.getSession().setAttribute("hint2", amcq.getHint2());
-				request.getSession().setAttribute("hint3", amcq.getHint3());
-				request.getSession().setAttribute("feedback", amcq.getFeedback());
+				//request.getSession().setAttribute("answer", amcq.getAnswer());
+				if(attempt < 1) {
+					request.getSession().setAttribute("hint1", "");
+					request.getSession().setAttribute("hint2", "");
+					request.getSession().setAttribute("hint3", "");
+					request.getSession().setAttribute("message", "");
+					request.getSession().setAttribute("feedback", "");
+					
+				}
+				if (attempt >=1) {
+					request.getSession().setAttribute("hint1", amcq.getHint1());
+				}else {
+					request.getSession().setAttribute("hint1", "");
+				}
+				if (attempt >=2) {
+					request.getSession().setAttribute("hint2", amcq.getHint2());
+				}else {
+					request.getSession().setAttribute("hint2", "");
+				}
+				if (attempt >=3) {
+					request.getSession().setAttribute("hint3", amcq.getHint3());
+					request.getSession().setAttribute("message", amcq.getAnswer());
+					request.getSession().setAttribute("feedback", amcq.getFeedback());
+				}else {
+					request.getSession().setAttribute("hint3", "");
+					request.getSession().setAttribute("message", "");
+					request.getSession().setAttribute("feedback", "");
+				}
+				
+				request.getSession().setAttribute("qNum", qNum);
 				//tryng to set question number
 				num+=1;
-				request.getSession().setAttribute("qNum", amcq.getMcq_id());
+				
 				
 				//request.setAttribute("questions", amcq.getQuestions());
 				
