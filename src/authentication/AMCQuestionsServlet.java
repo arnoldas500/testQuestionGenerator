@@ -27,7 +27,7 @@ import model.User;
 public class AMCQuestionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//global var for counter
-	public int qNum = 0;
+	public int qNum = 1;
 	public int attempt = 0;
        
     /**
@@ -216,13 +216,13 @@ public class AMCQuestionsServlet extends HttpServlet {
 				}
 				if (attempt >=1 && correct) {
 					request.getSession().setAttribute("hint1", amcq.getHint1());
-					request.getSession().setAttribute("flag", "Incorrect!");
+					request.getSession().setAttribute("flag", "Incorrect! Attempt "+ attempt);
 				}else {
 					request.getSession().setAttribute("hint1", "");
 				}
 				if (attempt >=2 && correct) {
 					request.getSession().setAttribute("hint2", amcq.getHint2());
-					request.getSession().setAttribute("flag", "Incorrect!");
+					request.getSession().setAttribute("flag", "Incorrect! Attempt "+ attempt);
 				}else {
 					request.getSession().setAttribute("hint2", "");
 				}
@@ -230,7 +230,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 					request.getSession().setAttribute("hint3", amcq.getHint3());
 					request.getSession().setAttribute("message", amcq.getAnswer());
 					request.getSession().setAttribute("feedback", amcq.getFeedback());
-					request.getSession().setAttribute("flag", "Incorrect!");
+					request.getSession().setAttribute("flag", "Incorrect! Attempt "+ attempt);
 				}else {
 					request.getSession().setAttribute("hint3", "");
 					request.getSession().setAttribute("message", "");
@@ -243,6 +243,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 				System.out.print("\nMCQ ID1 is : "+mcq_id1);
 				if (mcq_id1 == qNum) {
 					request.getSession().setAttribute("flag", "This is the last question!");
+					request.getSession().setAttribute("message", "This is the last question!");
 				}else if (qNum > mcq_id1) {
 					request.getSession().setAttribute("flag", "There is no more questions!");
 					request.getSession().setAttribute("message", "There is no more questions!");
