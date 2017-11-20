@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 
 <td>Username : <%=request.getSession().getAttribute("choiceA")%>
 						; Role : <%=request.getSession().getAttribute("roles")%>
 					</td>
 					<div style="color: #FF0000;">${choiceA}</div>
-
+ -->
 <h2 align="center" style="color: #FF0000;">Please answer multiple choice question:</h2>
 <div align="center">
  <form name="MCQuestions" method="post" action="AMCQuestionsServlet">  
@@ -28,14 +29,15 @@
 </form>
 
 <td>Username : <%=request.getSession().getAttribute("currentUser")%>
-						; Role : <%=request.getSession().getAttribute("roles")%>
+						
 					</td>
 
 			 -->
-			 <td>Username : <%=request.getSession().getAttribute("questions")%>
-						; Role : <%=request.getSession().getAttribute("roles")%>
-						<%=request.getAttribute("questions")%>
-					</td>
+			 <tr>
+					<td>Num : <%=request.getAttribute("qNum")%></td>
+					<td><input type="text" name="qNum"></td>
+				</tr>
+			 
 			 	<tr>
 					<td>Questions : <%=request.getSession().getAttribute("questions")%></td>
 					<td><input type="text" name="questions"></td>
@@ -75,23 +77,28 @@
 				</tr>
 				
 				<tr>
-					<td>Hint 2 : </td>
+					<td>Hint 2 : <%=request.getSession().getAttribute("hint1")%></td>
 					<td><input type="text" name="hint2" ></td>
 				</tr>
 				
 				<tr>
-					<td>Hint 3 : </td>
+					<td>Hint 3 : <%=request.getSession().getAttribute("hint1")%></td>
 					<td><input type="text" name="hint3" ></td>
 				</tr>
 				
 				<tr>
-					<td>Feedback : </td>
+					<td>Feedback : <%=request.getSession().getAttribute("hint1")%></td>
 					<td><input type="text" name="feedback" ></td>
 				</tr>
 
 				<tr>
 					<td>Save and Next Question</td>
-					<td><input type="submit" value="Save and Next Question"> <a href="nav.jsp">I am done!</a> </td>
+					<td><input type="submit" name="submit" value="Submit"> <a href="nav.jsp">I am done!</a> 
+					<input type="submit" name="next" value="Next">
+					</td>
+					<!-- 
+					<input type="submit" value="Save and Next Question" onclick="form.action='SecondServlet';">
+					 -->
 				</tr>
 
 			</tbody>

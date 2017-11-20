@@ -7,10 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<td>Username : <%=request.getSession().getAttribute("choiceA")%>
-						; Role : <%=request.getSession().getAttribute("roles")%>
-					</td>
-					<div style="color: #FF0000;">${choiceA}</div>
+
 
 <h2 align="center" style="color: #FF0000;">Please answer multiple choice question:</h2>
 <div align="center">
@@ -32,10 +29,10 @@
 					</td>
 
 			 -->
-			 <td>Username : <%=request.getSession().getAttribute("questions")%>
-						; Role : <%=request.getSession().getAttribute("roles")%>
-						
-					</td>
+			<tr>
+					<td>Num : <%=request.getAttribute("qNum")%></td>
+					<td><input type="integer" name="qNum"></td>
+				</tr>
 			 	<tr>
 					<td>Questions : <%=request.getAttribute("questions")%></td>
 					<td><input type="text" name="questions"></td>

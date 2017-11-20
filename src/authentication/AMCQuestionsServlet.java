@@ -1,6 +1,7 @@
 package authentication;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,6 +26,8 @@ import model.User;
 @WebServlet("/AMCQuestionsServlet")
 public class AMCQuestionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	//global var for counter
+	//public int qcounter = 0;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,11 +42,11 @@ public class AMCQuestionsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Here Do get");
-		request.setAttribute("hint1", "hello");
-		request.getSession().setAttribute("questions", "hello");
-	    RequestDispatcher view=request.getRequestDispatcher("/AMCQuestions.jsp");
-	    view.forward(request,response);
+//		System.out.println("Here Do get");
+//		request.setAttribute("hint1", "hello");
+//		request.getSession().setAttribute("questions", "hello");
+//	    RequestDispatcher view=request.getRequestDispatcher("/AMCQuestions.jsp");
+//	    view.forward(request,response);
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -53,9 +56,31 @@ public class AMCQuestionsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Here");
+		String answerUser = request.getParameter("answer");
+		String submit = request.getParameter("submit");
+		String next = request.getParameter("next");
+		//int qNum = request.getParameter("qNum");
+		int num = 1;
+		int userId = 0;
+		//qcounter++;
+		//System.out.println("qcounter "+qcounter);
 		try {
+			
+			userId = AuthDAO.getMCQ_id();
+			//userId -= 1;
+			//m.setUserId(userId);
+			System.out.println("Current user ID is : " + userId);
+			
 			System.out.println("inside try ");
+			System.out.println("user chosen answer "+ answerUser);
+			if(next != null) {
+				num +=1;
+				System.out.println("next Q, number "+ num);
+			}
+			System.out.println("question number "+ num);
+			System.out.println("butten pressed "+ submit);
+			System.out.println("butten pressed "+ next);
+			
 
 			/*
 			 * 
@@ -84,6 +109,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 			String hint2 = null;
 			String hint3 = null;
 			String feedback = null;
+			//int mcq_id = (Integer) null;
 
 			// creating sql queery from above data to fetch the data from the mySQL database
 			// String sql = "select * from User where username=? and password=? and role=?";
@@ -122,6 +148,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 					hint2 = resultSet.getString("hint2");
 					hint3 = resultSet.getString("hint3");
 					feedback = resultSet.getString("feedback");
+					mcq_id = resultSet.getInt("mcq_id");
 				}
 
 				amcq.setQuestions(questions);
@@ -134,6 +161,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 				amcq.setHint2(hint2);
 				amcq.setHint3(hint3);
 				amcq.setFeedback(feedback);
+				amcq.setMcq_id(mcq_id);
 				
 				
 
@@ -148,7 +176,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 				
 				//MCQuestions mcq = new MCQuestions();
 				//amcq = AuthDAO.getMCQById(mcq_id);
-				System.out.print("testing get mcquestion by id for question : " + amcq.getQuestions());
+				System.out.print("*testing get mcquestion by id for hint 1 : " + amcq.getHint1());
 
 				request.getSession().setAttribute("questions", amcq.getQuestions());
 				request.getSession().setAttribute("choiceA", amcq.getChoiceA());
@@ -160,9 +188,13 @@ public class AMCQuestionsServlet extends HttpServlet {
 				request.getSession().setAttribute("hint2", amcq.getHint2());
 				request.getSession().setAttribute("hint3", amcq.getHint3());
 				request.getSession().setAttribute("feedback", amcq.getFeedback());
-				request.setAttribute("questions", amcq.getQuestions());
+				//tryng to set question number
+				num+=1;
+				request.getSession().setAttribute("qNum", amcq.getMcq_id());
 				
-				request.getRequestDispatcher("/AMCQuestion.jsp").forward(request, response);
+				//request.setAttribute("questions", amcq.getQuestions());
+				
+				request.getRequestDispatcher("/AMCQuestions.jsp").forward(request, response);
 				
 				/*
 				 * //checking if information actually exist in the database
