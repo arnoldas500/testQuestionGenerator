@@ -44,7 +44,7 @@
 				<tr>
 					<!-- <td>Answer : </td> -->
 					<td>
-					Answer : <input type="text" name="answer" required="required"> 
+					Answer : <input type="text" name="answer"> 
 					</td>
 				</tr>
 				

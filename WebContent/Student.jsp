@@ -56,7 +56,8 @@ background-color: grey;
 
 			</tbody>
 		</table>
-
+		
+		<a href="AnswerQuestions.jsp">Answer Questions</a>
 
 		<%@include file="logout.jsp"%>
 	</div>

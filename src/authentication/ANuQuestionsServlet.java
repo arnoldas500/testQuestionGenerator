@@ -25,7 +25,7 @@ import model.NuQuestions;
 public class ANuQuestionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//global var for counter
-		public int NqNum = 1;
+		public int NqNum = 0;
 		public int Nattempt = 0;
        
     /**
@@ -185,10 +185,7 @@ public class ANuQuestionsServlet extends HttpServlet {
 						System.out.print("\nDBanswer is : "+nuq.getAnswer());
 						System.out.print("\nUser selectd answer is : "+answerUser);
 						
-						if (answerUser.equals(nuq.getAnswer())) {
-							request.getSession().setAttribute("flag", "Correct!");
-							correct = false;
-						}
+						
 						
 						
 						if(Nattempt < 1 && correct) {
@@ -214,7 +211,7 @@ public class ANuQuestionsServlet extends HttpServlet {
 						}
 						if (Nattempt >=3 && correct) {
 							request.getSession().setAttribute("hint3", nuq.getHint3());
-							request.getSession().setAttribute("message", nuq.getAnswer());
+							request.getSession().setAttribute("message", "out of chances, right answer is: "+nuq.getAnswer());
 							request.getSession().setAttribute("feedback", nuq.getFeedback());
 							request.getSession().setAttribute("flag", "Incorrect! Nattempt "+ Nattempt);
 						}else {
@@ -223,14 +220,21 @@ public class ANuQuestionsServlet extends HttpServlet {
 							request.getSession().setAttribute("feedback", "");
 						}
 						
+						if (answerUser.equals(nuq.getAnswer())) {
+							request.getSession().setAttribute("flag", "Correct!");
+							request.getSession().setAttribute("message", "Correct!");
+							request.getSession().setAttribute("feedback", "This is test 2");
+							correct = false;
+						}
+						
 						request.getSession().setAttribute("NqNum", NqNum);
 						
 						System.out.print("\nNqNum is : "+NqNum);
 						System.out.print("\nMCQ ID1 is : "+nuq_id1);
-						if (nuq_id1 == NqNum) {
+						if ((nuq_id1 == NqNum) && (submit == null)) {
 							request.getSession().setAttribute("flag", "This is the last question!");
 							request.getSession().setAttribute("message", "This is the last question!");
-						}else if (NqNum > nuq_id1) {
+						}else if ((NqNum > nuq_id1) && (submit == null)) {
 							request.getSession().setAttribute("flag", "There is no more questions!");
 							request.getSession().setAttribute("message", "There is no more questions!");
 							request.getSession().setAttribute("hint1", "");

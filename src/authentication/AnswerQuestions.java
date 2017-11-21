@@ -49,6 +49,8 @@ public class AnswerQuestions extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if ("AMCQuestionsServlet".equals(action)) {
+//			int NqNum = 0;
+//			int Nattempt = 0;
 			request.getRequestDispatcher("/AMCQuestions.jsp").forward(request, response);
 			//qNum = 0;
 			//int i = 0;
@@ -247,6 +249,8 @@ public class AnswerQuestions extends HttpServlet {
 //			
 //			
 		} else if ("ANuQuestionsServlet".equals(action)) {
+//			int NqNum = 0;
+//			int Nattempt = 0;
 			request.getRequestDispatcher("/ANuQuestion.jsp").forward(request, response);
 		}
 		

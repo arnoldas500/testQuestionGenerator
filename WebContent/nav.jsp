@@ -56,7 +56,7 @@ color: red;
 		<ul class="tab-group">
 			<li><a href="Student.jsp">Student</a></li>
 			<li><a href="TA.jsp">TA</a></li>
-			<li><a href="Retailer.jsp">Retailer</a></li>
+			
 			<li><a href="Instructor.jsp">Instructor</a></li>
 			<li><a href="Login.jsp">Login</a></li>
 			<li><a href="signup.jsp">Signup</a></li>

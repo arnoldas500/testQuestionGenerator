@@ -27,7 +27,7 @@ import model.User;
 public class AMCQuestionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//global var for counter
-	public int qNum = 1;
+	public int qNum = 0;
 	public int attempt = 0;
        
     /**
@@ -201,11 +201,10 @@ public class AMCQuestionsServlet extends HttpServlet {
 				
 				if (answerUser.equals(amcq.getAnswer())) {
 					request.getSession().setAttribute("flag", "Correct!");
+					request.getSession().setAttribute("message", "Correct!");
+					request.getSession().setAttribute("feedback", "This is test 2");
 					correct = false;
-				}
-				
-				
-				if(attempt < 1 && correct) {
+				}else if(attempt < 1 && correct) {
 					request.getSession().setAttribute("hint1", "");
 					request.getSession().setAttribute("hint2", "");
 					request.getSession().setAttribute("hint3", "");
@@ -228,7 +227,7 @@ public class AMCQuestionsServlet extends HttpServlet {
 				}
 				if (attempt >=3 && correct) {
 					request.getSession().setAttribute("hint3", amcq.getHint3());
-					request.getSession().setAttribute("message", amcq.getAnswer());
+					request.getSession().setAttribute("message", "out of chances, right answer is: "+amcq.getAnswer());
 					request.getSession().setAttribute("feedback", amcq.getFeedback());
 					request.getSession().setAttribute("flag", "Incorrect! Attempt "+ attempt);
 				}else {
@@ -239,12 +238,13 @@ public class AMCQuestionsServlet extends HttpServlet {
 				
 				request.getSession().setAttribute("qNum", qNum);
 				
+				
 				System.out.print("\nqNum is : "+qNum);
 				System.out.print("\nMCQ ID1 is : "+mcq_id1);
-				if (mcq_id1 == qNum) {
+				if ((mcq_id1 == qNum) && (submit == null)) {
 					request.getSession().setAttribute("flag", "This is the last question!");
 					request.getSession().setAttribute("message", "This is the last question!");
-				}else if (qNum > mcq_id1) {
+				}else if ((qNum > mcq_id1) && (submit == null)) {
 					request.getSession().setAttribute("flag", "There is no more questions!");
 					request.getSession().setAttribute("message", "There is no more questions!");
 					request.getSession().setAttribute("hint1", "");
